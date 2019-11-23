@@ -1,4 +1,22 @@
 % Encoding: UTF-8
+@book{HeMo11,
+	shorthand = {HeMo11},
+	author = {F. Henning; E. Moeller},
+	TITLE = {Handbuch Leichtbau},
+	publisher = {Hanser Verlag},
+  	YEAR = {2011},
+	note = "{1. Auflage}",
+	address = {München},
+}
+
+@phdthesis{Ober12,
+	shorthand = {Ober12},
+	author = {C. Oberschlep},
+	title = {Hybride Leichtbaustrukturen für den Karosseriebau - gusswerkstofforientierte Anwendungsuntersuchung für das 	    Druckgießen},
+	school ={Technische Hochschule Aachen},
+	year = {2012},
+	address = {Aachen},
+}
 
 @Article{studie1,
   title = {{Artikel zur Studie von Insight Health über Nahrungsergänzungsmittel auf der Website des deutschen Lebensmittelverbandes}},
