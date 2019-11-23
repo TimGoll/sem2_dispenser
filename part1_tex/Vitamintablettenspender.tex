@@ -136,7 +136,7 @@ der Universität des Saarlandes\\
 \Large von\\
 \vspace{1cm}
 Kristian König und Tim Goll\\
-Matrikelnummern: 2560270, 1234567 \\
+Matrikelnummern: 2560270, 2553050 \\
 Gruppennummer: 1\\
 \vspace{1cm}
 Saarbrücken, 2019
@@ -190,22 +190,22 @@ Saarbrücken, 2019
 %Inhaltsverzeichnis
 \tableofcontents \thispagestyle{empty} \newpage
 
-%Abbildungsverzeichnis
-\listoffigures \thispagestyle{empty} \newpage
-
-%Tabellenverzeichnis
-\listoftables \thispagestyle{empty} \newpage
-
 %Seitennummerierung neu beginnen, Zahlen [arabic], röm.Zahlen [roman,Roman], Buchstaben [alph,Alph]
 \pagenumbering{arabic} \newpage
 \renewcommand*{\chapterpagestyle}{empty}
 
 %Einbinden aller .tex-Dateien, welche die einzelnen Kapitel beinhalten
-\include{01_Lastenheft}
-\include{02_Konzeptionierung}
-\include{03_Detaillierung}
-\include{04_Ausarbeitung}
-\include{05_Prototypenbau}
+\include{chapter/01_Lastenheft}
+\include{chapter/02_Konzeptionierung}
+\include{chapter/03_Detaillierung}
+\include{chapter/04_Ausarbeitung}
+\include{chapter/05_Prototypenbau}
+
+%Abbildungsverzeichnis
+\listoffigures \thispagestyle{empty} \newpage
+
+%Tabellenverzeichnis
+\listoftables \thispagestyle{empty} \newpage
 
 \printbibliography
 
