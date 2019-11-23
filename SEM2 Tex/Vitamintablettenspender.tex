@@ -1,0 +1,216 @@
+%Dokumentklasse
+\documentclass[a4paper,12pt, headings=small, bibtotoc, numbers=noenddot]{scrreprt} %bibtotoc = bibliography to table of contents, bindet Literaturverzeichnis in Inhaltsverzeichnis ein
+\usepackage[left= 2.5cm,right = 2cm, top = 2cm, bottom = 2cm]{geometry} %Seitenränder
+\usepackage[onehalfspacing]{setspace} %1,5 Zeilenabstand
+
+% ============= Packages =============
+
+% Dokumentinformationen
+\usepackage[
+	pdftitle={Titel der Arbeit},
+	pdfsubject={Abschlussarbeit},
+	pdfauthor={Max Mustermann},
+	pdfkeywords={}
+	pdftex=true, 
+	colorlinks=true,
+ 	breaklinks=true,
+	citecolor=black,
+	linkcolor=black,	
+	menucolor=black,	
+	urlcolor=black,
+]{hyperref}
+
+
+% Standard Packages
+\usepackage{libertine}	%Schriftart "Biolinum", Sans Serif
+\renewcommand*\familydefault{\sfdefault} %Setzt die Standardschriftart auf Sans Serif
+\usepackage[T1]{fontenc}
+\usepackage{mathptmx} %Times new roman
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\AtBeginDocument{\renewcommand{\chaptername}{}}
+
+\usepackage{rotating}
+\usepackage{subfigure}
+\usepackage{graphicx}
+\graphicspath{{img/}}
+
+\usepackage{multirow}
+
+\usepackage{fancyhdr}
+\usepackage{lmodern}
+\usepackage{color}
+\usepackage{transparent}
+\usepackage[justification=centering, singlelinecheck=false]{caption} %Damit die Tabellenbeschriftung zentriert steht
+\usepackage{nomencl}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{pdfpages}
+\usepackage{acronym}
+\usepackage{setspace}
+
+%Schriftgröße von section auf 12pt setzen
+\addtokomafont{section}{\normalsize} 
+\addtokomafont{chapter}{\large}
+%Abbildungsbeschriftungen fett gedruckt einstellen
+\addtokomafont{captionlabel}{\bfseries}
+
+
+%Abstände zwischen Text und Überschriften
+%Zeilenabstände bei Unterkapiteln
+\RedeclareSectionCommand[beforeskip=18pt, afterskip=6pt]{section}
+%Zeilenabstände bei Unter-unterkapiteln 
+\RedeclareSectionCommand[beforeskip=12pt,afterskip=1pt]{subsection}
+\RedeclareSectionCommand[%
+  beforeskip=0pt,
+  afterskip=1\baselineskip plus .1\baselineskip minus .167\baselineskip
+]{chapter}
+
+
+% zusätzliche Schriftzeichen der American Mathematical Society
+\usepackage{amsfonts}
+\usepackage{amsmath}
+
+\usepackage{float} %erlaubt die Verwendung von H in Bildern
+% mu im normalen Text: \textmu
+\usepackage{textcomp}
+
+\usepackage[backend=biber, style=alphabetic,uniquename=allfull,minalphanames=4,maxalphanames=4]{biblatex}
+\addbibresource{Literatur.bib}
+
+% nicht einrücken nach Absatz
+\setlength{\parindent}{0pt}
+
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{4}
+
+%url umbrechen
+\usepackage{url}
+
+\usepackage{microtype} %Sorgt für bessere Platzausnutzung der \hbox bei Umbruechen
+\setlength{\emergencystretch}{1em} %Sorgt für bessere Platzausnutzung der \hbox bei Umbruechen
+
+\setcounter{biburlnumpenalty}{100}
+\setcounter{biburlucpenalty}{100}
+\setcounter{biburllcpenalty}{100}
+% ============= Package Einstellungen & Sonstiges ============= 
+
+%römische Aufzählungen mit \RM{Zahl}
+\newcommand{\RM}[1]{\MakeUppercase{\romannumeral #1}}
+
+% ============= Dokumentbeginn =============
+
+\begin{document}
+
+\pagestyle{empty}   %leere Seite
+
+%Seitennummerierung neu beginnen, Zahlen [arabic], röm.Zahlen [roman,Roman], Buchstaben [alph,Alph]
+
+%Deckblatt
+\label{Coversheet}
+\begin{minipage}{0.5\textwidth}
+\begin{flushleft}
+\includegraphics[width=\textwidth]{Bilder/LKT_logo.png}
+\end{flushleft}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{flushright}
+\includegraphics[width=0.65\textwidth]{Bilder/UdS_Logo.png}
+\end{flushright}
+\end{minipage}
+\headrule
+
+\vspace{1.5cm}
+
+\begin{center}
+\LARGE \textbf{Vitamintablettenspender}\\ 
+\vspace{3cm}
+\textbf{Projektarbeit} \\
+\Large Systementwicklungsmethodik 2\\ 
+WS 2019/20\\
+im Studiengang Systems Engineering\\
+der Naturwissenschaftlich-Technischen Fakultät \\
+der Universität des Saarlandes\\
+\vspace{2.5cm}
+\Large von\\
+\vspace{1cm}
+Kristian König und Tim Goll\\
+Matrikelnummern: 2560270, 1234567 \\
+Gruppennummer: 1\\
+\vspace{1cm}
+Saarbrücken, 2019
+\end{center}
+\newpage 
+
+%Leerseite für doppelseitigen Druck
+\thispagestyle{empty}
+\quad 
+\newpage
+
+%Aufgabenstellung
+%Hier wird die der verfassten Arbeit zugehörige Aufgabenstellung im PDF-Format eingebunden. Dazu wird im folgenden Block der Titel ,,Aufgabenstellung.pdf'' durch den entsprechenden Dateinamen ersetzt.
+\label{Aufgabenstellung}
+\includepdf[pages={1-5}]{Bilder/aufgabenstellung}
+\newpage
+
+%Leerseite für doppelseitigen Druck
+%\thispagestyle{empty}
+%\quad 
+%\newpage
+
+%Eidestatliche Erklärung
+%\label{Erklaerung}
+
+%\begin{center} 
+%\begin{minipage}[t]{120mm}
+% \vspace{8cm}
+%Ich versichere hiermit, dass ich die vorliegende Arbeit
+%angegebenen Quellen und Hilfsmittel benutzt habe.\\  
+%\end{minipage}
+%\end{center}
+
+%\vspace{3cm}
+%Saarbrücken, den 30.04.2018  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Vorname Nachname
+%\newpage
+
+%Leerseite für doppelseitigen Druck
+%\thispagestyle{empty}
+%\quad 
+%\newpage
+
+\pagestyle{fancy} \newpage   %Seitenlayout normal
+\fancyhf{} 
+\fancyhead[L]{\nouppercase{{\fancyplain{}{\rightmark }}} } 
+\fancyhead[R]{\thepage} 
+\renewcommand{\headrulewidth}{0.5pt} 
+\pagenumbering{Roman}
+
+
+%Inhaltsverzeichnis
+\tableofcontents \thispagestyle{empty} \newpage
+
+%Abbildungsverzeichnis
+\listoffigures \thispagestyle{empty} \newpage
+
+%Tabellenverzeichnis
+\listoftables \thispagestyle{empty} \newpage
+
+%Seitennummerierung neu beginnen, Zahlen [arabic], röm.Zahlen [roman,Roman], Buchstaben [alph,Alph]
+\pagenumbering{arabic} \newpage
+\renewcommand*{\chapterpagestyle}{empty}
+
+%Einbinden aller .tex-Dateien, welche die einzelnen Kapitel beinhalten
+\include{01_Lastenheft}
+\include{02_Konzeptionierung}
+\include{03_Detaillierung}
+\include{04_Ausarbeitung}
+\include{05_Prototypenbau}
+
+\printbibliography
+
+%Einbinden des Anhangs
+\appendix
+\include{A_Anhang}
+
+\end{document}
