@@ -17,11 +17,13 @@ In der Patentanalyse wurde mittels der Bottom-Up-Recherche-Methode sichergestell
 
 
 \section{Projektplan}
-\begin{center}
-\begin{figure}
-\includegraphics[angle=90, width=\textwidth]{chapter/Bilder/gant} 
+\FloatBarrier
+\begin{figure}[h!]
+	\centering
+	\includegraphics[angle=90, width=\textwidth]{chapter/Bilder/gant} 
+	\caption{Projektplan}
 \end{figure}
-\end{center}
+
 
 \begin{itemize}
 \item Aufgaben
@@ -41,63 +43,78 @@ In der Patentanalyse wurde mittels der Bottom-Up-Recherche-Methode sichergestell
 \newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}} % zentriert mit Breitenangabe
 \newcolumntype{R}[1]{>{\raggedleft\arraybackslash}p{#1}} % rechtsbündig mit Breitenangabe
 
-\begin{longtable}{C{0.05\linewidth}C{0.05\linewidth}C{0.05\linewidth}L{0.75\linewidth}}
+\begin{longtable}{C{0.03\linewidth}C{0.05\linewidth}C{0.05\linewidth}L{0.5\linewidth}C{0.14\linewidth}C{0.07\linewidth}}
 	\toprule
  	
- 	\textbf{Nr.} & \textbf{F/W} & \textbf{Gew.} & \textbf{Beschreibung und Erläuterung}  \\
+ 	\textbf{Nr.} & \textbf{F/W} & \textbf{Gew.} & \textbf{Beschreibung und Erläuterung} & \textbf{Faktortyp} & \textbf{Ver.}\\
 	
 	\toprule
 	\endfirsthead
 	
-	\textbf{1} & & & \textbf{Funktionsanforderungen}  \\
-	1.1 & F & & Automatischer Auswurf der gewählten Vitamintablette\\
-	1.2 & W & & Automatischer Auswurf einer Tablette bei Platzierung eines Trinkbehälters\\
-	1.3 & W & & Immer nur eine der Tageszeit entsprechende Tablette darf ausgeworfen werden um Vitaminbalance zu garantieren \\
-	1.4 & W & & Modernes Design \\
-	1.5 & F & & Gute Standfestigkeit\\
-	1.6 & F & & Anzeige der aktuellen Uhrzeit \\
-	1.7 & F & & Anzeige des nächsten Tablettentyps, der eingenommen werden soll\\
-	1.8 & F & & Anzeige der Uhrzeit für die nächste zu nehmende Tablette\\
-	1.9 & F & & Bedienung am Touchdisplay\\
-	1.10 & W & & Nutzerprofile, sodass zwischen mehreren Nutzern gewechselt werden kann \\
-	1.11 & F & & Vorrat-Leer Sensor um Nutzer auf Röhrchenwechsel hinzuweisen \\
-	1.12 & W & & Warnton, wenn Tablette vergessen wurde \\
+	\textbf{1} & & & \textbf{Funktionsanforderungen} && \\
+	1.1 & F & & Automatische Ausgabe einer Vitamintablette nach Wahleingabe über einen Auswurf in einen Trinkbehälter & Basis & KK/TG\\
+	1.2 & W & 9 & Ausgabe sollte innerhalb 15 Sekunden nach Wahleingabe erfolgen & Leistung & KK/TG\\
+	1.3 & W & 6 & Automatische Ausgabe einer Tablette bei Platzierung eines Trinkbehälters unter den Auswurf&Begeisterung& KK/TG\\
+	1.4 & W & 10 & Automatisches Auffüllen des Trinkbehälters mit Wasser nach Tablettenausgabe &Begeisterung& KK/TG\\
+	1.5 & W & 4 & Es sollte nur eine der Tageszeit entsprechende Tablette ausgegeben werden, um die Vitaminbalance des Nutzers zu garantieren &Begeisterung& KK/TG \\
+	1.6 & F & & Aufbewahrungs- und Ausgabemöglichkeit für mindestens zwei unterschiedliche Vitamintablettensorten & Basis & KK/TG\\
+	1.7 & F & & Aufbewahrungsmöglichkeit für mindestens 20 Brausetabletten je Vitamintablettensorte & Basis & KK/TG\\
+	1.8 & F & & Anzeige der aktuellen Uhrzeit & Basis & KK/TG\\
+	1.9 & W & 5 & Anzeige des nächsten Tablettentyps, der vom Nutzer eingenommen werden soll, um eine regelmäßigen Tabletteneinnahme zu überwachen &Begeisterung& KK/TG\\
+	1.10 & W & 4 & Anzeige der Uhrzeit für die vom Nutzer als nächstes zu nehmende Tablette &Begeisterung& KK/TG\\
+	1.11 & W & 3 & Warnton, wenn Uhrzeit von Anforderung 1.10 für einen Nutzer um fünf Minuten überschritten wurde &Begeisterung& KK/TG\\
+	1.12 & W & 2 & Verschiedene Nutzerprofile, sodass die Überwachung der regelmäßigen Tabletteneinnahme für mehrere Nutzern erfolgen kann &Begeisterung& KK/TG\\
+	1.13 & W & 10 & Bedienung per Touchdisplay &Begeisterung& KK/TG\\
+	1.14 & W & 10 & Füllstandsanzeige der Tablettenreservoirs &Begeisterung& KK/TG\\
 	
 	\midrule
 	
-	\textbf{2} & & & \textbf{Mechanische/Geometrische Anforderungen} \\
-	2.1 & F & & Muss kompatibel sein mit handelsüblichen Vitaminröhrchen \\
-	2.2 & F & & Verwendung robuster Sensoren um Lebensdauer zu erhöhen \\
-	2.3 & W & & Handliches Gewicht: $<\,5\,\text{kg}$ \\
-	2.4 & W & & Maximale Abmessungen: $X\,\text{cm}\,\times\,Y\,\text{cm}\,\times\,Z\,\text{cm}$ \\
+	\textbf{2} & & & \textbf{Mechanische/Geometrische Anforderungen} &&\\
+	2.1 & F & & Kompatibel für handelsübliche Vitamintabletten mit den Abmaßen: $\text{Durchmesser}\,\times\,\text{Höhe}\,=\,25\,\text{mm}\,\times\,6\,\text{mm}$ & Leistung  & KK/TG\\
+	2.2 & F & & Maximales Gewicht: $5\,\text{kg}$ & Leistung & KK/TG\\
+	2.3 & F & & Maximale Abmessungen: $\text{Länge}\,\times\,\text{Breite}\,\times\,\text{Höhe}\,=\,300\,\text{mm}\,\times\,300\,\text{mm}\,\times\,450\,\text{mm}$ & Leistung  & KK/TG\\
+	2.4 & F & & Geeignet für alle Trinkbehälter mit den maximalen Abmessungen: $\text{Durchmesser}\,\times\,\text{Höhe}\,=\,90\,\text{mm}\,\times\,180\,\text{mm}$ & Leistung & KK/TG\\
 	
 	\midrule
 	
-	\textbf{3} & & & \textbf{Sicherheitsanforderungen} \\
-	3.1 & F & & Auswurfsmechanismus muss geschützt sein, sodass Finger nicht versehentlich hinein gerät \\
-	3.2 & F & & Standfeste Position des Glases \\
+	\textbf{3} & & & \textbf{Sicherheitsanforderungen} &&\\
+	3.1 & F & & Schutz des mechanischen Tablettenauswurfs & Basis & KK/TG\\
+	3.2 & F & & Keine scharfen Kanten & Basis & KK/TG\\
+	3.3 & F & & Im Betrieb kein Zugang zu elektrischen Bauteilen möglich & Basis & KK/TG\\
 	
 	\midrule 
 	
-	\textbf{4} & & & \textbf{Umwelt- und Wartungsanforderungen} \\
-	4.1 & F & & Verwendung von lebensmittelechten Materialien \\
+	\textbf{4} & & & \textbf{Umwelt- und Wartungsanforderungen} &&\\
+	4.1 & W & 3 & Gehäuses soll recyclebar sein & Leistung & KK/TG\\
+	4.2 & F & & Wartungsintervall: 1x jährlich & Leistung & KK/TG\\
 	
 	\midrule
 	
-	\textbf{5} & & & \textbf{Produktions- und Fertigungsanforderungen} \\
-	5.1 & F & & Funktionsprototyp bis zum 07.02.2020 \\
-	5.2 & W & & Verwendung wasserfester Materialien \\
+	\textbf{5} & & & \textbf{Produktions- und Fertigungsanforderungen}&& \\
+	5.1 & F & & Funktionsprototyp bis zum 07.02.2020 & Leistung & KK/TG\\
+	5.2 & F & & Gehäuse des Prototyps mittels RPT per 3D-Druck & / & KK/TG\\
+	5.3 & F & & Verwendung wasserfester Materialien &Basis& KK/TG\\
+	5.4 & F & & Norm- und Zukaufteile zu bevorzugen & / & KK/TG\\
+	5.5 & F & & Motoren des automatischen Auswurfs als Zukaufteile & / & KK/TG\\
+	5.6 & W & 8 & Pumpe zum Auffüllen des Trinkbehälters sollte für Anforderung 1.4 ein Zukaufteil sein & / & KK/TG\\
+	5.7 & W & 6 & Verwendung robuster Sensoren mit einer Lebensdauer $>\, 50.000\,$h & Leistung & KK/TG\\
 	
 	\midrule
 	
-	\textbf{6} & & & \textbf{Sonstiges} \\
-	6.1 & F & & \\
+	\textbf{6} & & & \textbf{Sonstige Anforderungen} &&\\
+	6.1 & F & & Betrieb über eine haushaltsübliche 230V Steckdose & Basis &\\
 	
 	\bottomrule
 	
-	\caption{Anforderungsliste (F$\,=\,$Festanforderung, W$\,=\,$Wunschanforderung)}
+	\caption{Anforderungsliste (F$\,=\,$Festanforderung, W$\,=\,$Wunschanforderung, Gew.$\,=\,$Gewichtung, Ver.$\,=\,$Verantwortlicher)}
 	\label{anforderungsliste}
 \end{longtable}
+\FloatBarrier
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\textwidth]{chapter/Bilder/kano} 
+	\caption{Kano-Diagramm zur Verdeutlichung der Lage der Anforderungen}
+\end{figure}
 
 
 \section{Funktionsstruktur}
