@@ -1,33 +1,17 @@
 % Encoding: UTF-8
-@book{HeMo11,
-	shorthand = {HeMo11},
-	author = {F. Henning; E. Moeller},
-	TITLE = {Handbuch Leichtbau},
-	publisher = {Hanser Verlag},
-  	YEAR = {2011},
-	note = "{1. Auflage}",
-	address = {München},
+
+@Misc{LMV,
+  author = {{Lebensmittelverband Deutschland}},
+  title  = {{Artikel zur Studie von Insight Health über Nahrungsergänzungsmittel auf der Website des deutschen Lebensmittelverbandes}},
+  year   = {{Stand: 23.10.2019}},
+  url    = {https://www.lebensmittelverband.de/de/verband/organisation/arbeitskreise/arbeitskreis-nahrungsergaenzungsmittel-ak-nem/20181029-zahlen-nahrungsergaenzungsmittel-markt-2018},
 }
 
-@phdthesis{Ober12,
-	shorthand = {Ober12},
-	author = {C. Oberschlep},
-	title = {Hybride Leichtbaustrukturen für den Karosseriebau - gusswerkstofforientierte Anwendungsuntersuchung für das 	    Druckgießen},
-	school ={Technische Hochschule Aachen},
-	year = {2012},
-	address = {Aachen},
-}
-
-@Article{studie1,
-  title = {{Artikel zur Studie von Insight Health über Nahrungsergänzungsmittel auf der Website des deutschen Lebensmittelverbandes}},
-  year  = {{Stand: 23.11.2019}},
-  url   = {https://www.lebensmittelverband.de/de/verband/organisation/arbeitskreise/arbeitskreis-nahrungsergaenzungsmittel-ak-nem/20181029-zahlen-nahrungsergaenzungsmittel-markt-2018},
-}
-
-@Article{studie2,
-  title = {Aritkel von Germany Trade\&Invest über die Krankhäuser und Medizintechnik in Norwegen},
-  year  = {{Stand: 23.11.2019}},
-  url   = {https://www.gtai.de/GTAI/Navigation/DE/Trade/Maerkte/suche,t=norwegen-investiert-in-neue-krankenhaeuser-und-medizintechnik,did=1843880.html},
+@Misc{www2,
+  author = {Charlotte Schneider},
+  title  = {{Artikel von Germany Trade \& Invest über die Krankhäuser und Medizintechnik in Norwegen}},
+  year   = {{Stand: 18.10.2019}},
+  url    = {https://www.gtai.de/GTAI/Navigation/DE/Trade/Maerkte/suche,t=norwegen-investiert-in-neue-krankenhaeuser-und-medizintechnik,did=1843880.html},
 }
 
 @Comment{jabref-meta: databaseType:bibtex;}
