@@ -189,7 +189,7 @@ Saarbrücken, 2019
 
 
 %Inhaltsverzeichnis
-\tableofcontents \thispagestyle{empty} \newpage
+\clearpage \thispagestyle{empty}  ~ \clearpage \tableofcontents \thispagestyle{empty} \newpage
 
 %Seitennummerierung neu beginnen, Zahlen [arabic], röm.Zahlen [roman,Roman], Buchstaben [alph,Alph]
 \pagenumbering{arabic} \newpage
@@ -198,9 +198,9 @@ Saarbrücken, 2019
 %Einbinden aller .tex-Dateien, welche die einzelnen Kapitel beinhalten
 \include{chapter/01_Lastenheft}
 \include{chapter/02_Konzeptionierung}
-\include{chapter/03_Detaillierung}
-\include{chapter/04_Ausarbeitung}
-\include{chapter/05_Prototypenbau}
+%\include{chapter/03_Detaillierung}
+%\include{chapter/04_Ausarbeitung}
+%\include{chapter/05_Prototypenbau}
 
 %Abbildungsverzeichnis
 \listoffigures \thispagestyle{empty} \newpage
