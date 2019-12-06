@@ -1,15 +1,24 @@
-#include "src/display.hpp"
-
-#define SCREEN_WIDTH 128 // OLED display width, in pixels
-#define SCREEN_HEIGHT 32 // OLED display height, in pixels
-#define SCREEN_ADDRESS 0x3C
-
-DisplayHandler* displayHandler = new DisplayHandler();
+#include "src/main.hpp"
 
 void setup() {
-	displayHandler->init(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_ADDRESS);
-}
+	Serial.begin(115200);
 
-void loop() {
-	displayHandler->update();
+	Serial.println("Setting up main class ...");
+
+	Main* mainClass = new Main();
+
+	Serial.println("Done.");
+	Serial.println("Software is now running.");
+
+	bool alive = true;
+	while (alive) {
+		alive = mainClass->update();
+	}
+
+	Serial.println("Quitting Software.");
+
+	delete mainClass;
+
+	// stay stuck in here forever
+	while(true);
 }

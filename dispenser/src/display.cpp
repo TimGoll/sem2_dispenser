@@ -28,7 +28,7 @@ void DisplayHandler::update() {
 	this->last_draw = millis();
 
 	this->display->clearDisplay();
-	this->draw_text(
+	this->drawText(
 		this->display,
 		"Hello World!\nThis is a new line\nTHIRD!",
 		/*size:*/1, /*x:*/0, /*y:*/0
@@ -38,11 +38,11 @@ void DisplayHandler::update() {
 	this->display->display();
 }
 
-void DisplayHandler::draw_text(Adafruit_SSD1306* display, uint8_t* text) {
-	this->draw_text(display, text, 1, 0, 0);
+void DisplayHandler::drawText(Adafruit_SSD1306* display, uint8_t* text) {
+	this->drawText(display, text, 1, 0, 0);
 }
 
-void DisplayHandler::draw_text(Adafruit_SSD1306* display, uint8_t* text, uint8_t size, uint8_t posX, uint8_t posY) {
+void DisplayHandler::drawText(Adafruit_SSD1306* display, uint8_t* text, uint8_t size, uint8_t posX, uint8_t posY) {
 	display->setTextColor(SSD1306_WHITE);
 	display->setTextSize(size);
 	display->setCursor(posX, posY);
