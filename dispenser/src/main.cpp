@@ -8,7 +8,7 @@ Main::Main() {
 	this->buttonHandler = new ButtonHandler();
 	this->displayHandler = new DisplayHandler();
 
-	this->buttonHandler->addCallback(10, RISING, &callbackTest, this, 1500, 250);
+	this->buttonHandler->addCallback(10, RISING, this, &callbackTest, 1500, 250);
 
 	displayHandler->init(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_ADDRESS);
 

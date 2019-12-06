@@ -1,10 +1,8 @@
 #include "buttons.hpp"
 
-Button::Button(uint8_t pin_number, uint8_t type, callback_t callback, void* callback_scope, uint16_t start_time, uint16_t interval_time) {
+Button::Button(uint8_t pin_number, uint8_t type, uint16_t start_time, uint16_t interval_time) {
 	this->pin_number = pin_number;
 	this->type = type;
-	this->callback = callback;
-	this->callback_scope = callback_scope;
 	this->start_time = start_time;
 	this->interval_time = interval_time;
 
@@ -26,15 +24,11 @@ bool Button::isType(uint8_t type) {
 	return type == this->type;
 }
 
-void Button::runCallback(uint8_t type) {
-	this->callback(this->callback_scope, type);
-}
-
-uint16_t Button::GetStartTime() {
+uint16_t Button::getStartTime() {
 	return this->start_time;
 }
 
-uint16_t Button::GetIntervalTime() {
+uint16_t Button::getIntervalTime() {
 	return this->interval_time;
 }
 
@@ -91,15 +85,16 @@ ButtonHandler::~ButtonHandler() {
 
 }
 
-bool ButtonHandler::addCallback(uint8_t pin_number, uint8_t type, callback_t callback, void* callback_scope) {
+bool ButtonHandler::addCallback(uint8_t pin_number, uint8_t type, void* callback_scope, callback_t callback) {
 	return this->addCallback(pin_number, type, callback, callback_scope, 0, 0);
 }
 
-bool ButtonHandler::addCallback(uint8_t pin_number, uint8_t type, callback_t callback, void* callback_scope, uint16_t start_time, uint16_t interval_time) {
+bool ButtonHandler::addCallback(uint8_t pin_number, uint8_t type, void* callback_scope, callback_t callback, uint16_t start_time, uint16_t interval_time) {
 	if (this->button_amount == MAX_AMOUNT_BUTTONS)
 		return false;
 
-	this->button_list[this->button_amount] = new Button(pin_number, type, callback, callback_scope, start_time, interval_time);
+	this->button_list[this->button_amount] = new Button(pin_number, type, start_time, interval_time);
+	this->button_list[this->button_amount]->registerCallback(callback_scope, callback);
 	this->button_amount++;
 
 	return true;

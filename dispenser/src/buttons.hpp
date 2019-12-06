@@ -3,15 +3,14 @@
 
 #include <Arduino.h>
 
+#include "callback.hpp"
+
 #define MAX_AMOUNT_BUTTONS 8
 
-//defining a type for the callback function
-typedef void (*callback_t)(void*, uint8_t);
-
-class Button {
+class Button : public Callback {
 	public:
 		// Defaultconstructor
-		Button(uint8_t pin_number, uint8_t type, callback_t callback, void* callback_scope, uint16_t start_time, uint16_t interval_time);
+		Button(uint8_t pin_number, uint8_t type, uint16_t start_time, uint16_t interval_time);
 		// Destructor
 		~Button();
 
@@ -41,14 +40,6 @@ class Button {
 		*/
 		/**************************************************************************/
 		bool isType(uint8_t type);
-
-		/**************************************************************************/
-		/*!
-			@brief	Runs the passed callback function with the type as a parameter
-			@param type The type to be passed
-		*/
-		/**************************************************************************/
-		void runCallback(uint8_t type);
 
 		/**************************************************************************/
 		/*!
@@ -87,8 +78,6 @@ class Button {
 	private:
 		uint8_t pin_number;
 		uint8_t type;
-		callback_t callback;
-		void* callback_scope;
 		uint16_t start_time;
 		uint16_t interval_time;
 
@@ -110,12 +99,12 @@ class ButtonHandler {
 					while also handling all button specific stuff (pinMode, ...)
 			@param pin_number The pin number of the button to react to
 			@param type The type of the callback checks (RISING, FALLING, CHANGE)
-			@param callback The callback function to be called
 			@param callback_scope The callback scope to be passed with the function
+			@param callback The callback function to be called
 			@param return Returns if registration was successfull
 		*/
 		/**************************************************************************/
-		bool addCallback(uint8_t pin_number, uint8_t type, callback_t callback, void* callback_scope);
+		bool addCallback(uint8_t pin_number, uint8_t type, void* callback_scope, callback_t callback);
 
 		/**************************************************************************/
 		/*!
@@ -126,14 +115,14 @@ class ButtonHandler {
 					interval_time has passed as long as the button is still pressed
 			@param pin_number The pin number of the button to react to
 			@param type The type of the callback checks (RISING, FALLING, CHANGE)
-			@param callback The callback function to be called
 			@param callback_scope The callback scope to be passed with the function
+			@param callback The callback function to be called
 			@param start_time If != 0, The callback can be polled after start_time
 			@param interval_time The polling interval
 			@param return Returns if registration was successfull
 		*/
 		/**************************************************************************/
-		bool addCallback(uint8_t pin_number, uint8_t type, callback_t callback, void* callback_scope, uint16_t start_time, uint16_t interval_time);
+		bool addCallback(uint8_t pin_number, uint8_t type, void* callback_scope, callback_t callback, uint16_t start_time, uint16_t interval_time);
 
 		/**************************************************************************/
 		/*!
