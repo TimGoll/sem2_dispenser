@@ -10,6 +10,11 @@ Main::Main() {
 	this->menuHandler = new MenuHandler();
 
 	displayHandler->init(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_ADDRESS);
+	displayHandler->setMenu(
+		this->menuHandler->menuOpenPtr(),
+		this->menuHandler->menuIndexPtr(),
+		this->menuHandler->menuOffsetPtr()
+	);
 
 	// REGISTERING MENU BUTTON CALLBACKS
 	this->buttonHandler->addCallback(10, RISING, this->menuHandler, &MenuHandler::buttonPrev);

@@ -8,7 +8,7 @@
 #define MENU_ACTION 0
 #define MENU_SUBMENU 1
 
-#define MENU_DISPLAY_LINES 4
+#define MENU_DISPLAY_LINES 2
 
 class MenuElement;
 
@@ -32,6 +32,7 @@ class MenuElement : public Callback {
 		uint8_t* getName();
 		uint8_t getType();
 		bool isType(uint8_t type);
+		bool isTopLevel();
 
 	private:
 		uint8_t* name;
@@ -49,6 +50,10 @@ class MenuHandler {
 		static void buttonPrev(MenuHandler* self, uint8_t type);
 		static void buttonUp(MenuHandler* self, uint8_t type);
 		static void buttonDown(MenuHandler* self, uint8_t type);
+
+		MenuElement** menuOpenPtr();
+		uint8_t* menuIndexPtr();
+		uint8_t* menuOffsetPtr();
 
 	private:
 		MenuElement* menu_open;

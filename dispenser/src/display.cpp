@@ -19,23 +19,56 @@ void DisplayHandler::init(uint8_t width, uint8_t height, uint8_t address) {
 	this->display->clearDisplay();
 }
 
+void DisplayHandler::setMenu(MenuElement** menu_open, uint8_t* menu_index, uint8_t* menu_offset) {
+	this->menu_open = menu_open;
+	this->menu_index = menu_index;
+	this->menu_offset = menu_offset;
+}
+
 void DisplayHandler::update() {
 	// make sure to update display only when needed on not on every loop cycle
 	if (millis() - this->last_draw <= DRAWTIME)
 		return;
 
-	// set last time to now
-	this->last_draw = millis();
-
 	this->display->clearDisplay();
-	this->drawText(
-		this->display,
-		"Hello World!\nThis is a new line\nTHIRD!",
-		/*size:*/1, /*x:*/0, /*y:*/0
-	);
+
+	// draw common graphics
+	this->drawText(this->display, "MON");
+
+	char buffer[21];
+	if (millis() % 2000 >= 1000)
+		sprintf(buffer, "%02d:%02d", 12, 24);
+	else
+		sprintf(buffer, "%02d %02d", 12, 24);
+	
+	this->drawText(this->display, buffer, 1, 98, 0);
+
+	this->display->drawFastHLine(0, 9, 128, SSD1306_WHITE);
+
+	if ((*this->menu_open)->isTopLevel())
+		this->drawMainScreen(13);
+	else
+		this->drawMenuScreen(13);
 
 	// update display
 	this->display->display();
+
+	// set last time to now
+	this->last_draw = millis();
+}
+
+void DisplayHandler::drawMainScreen(uint8_t start_y) {
+	this->drawText(
+		this->display,
+		"Hello World!\nThis is a new line!",
+		/*size:*/1, /*x:*/0, /*y:*/start_y
+	);
+}
+
+void DisplayHandler::drawMenuScreen(uint8_t start_y) {
+	for (uint8_t i = *this->menu_offset; i < min(MENU_DISPLAY_LINES + *this->menu_offset, (*this->menu_open)->getChildAmount()); i++) {
+		this->drawText(this->display, (*this->menu_open)->getChildAtIndex(i)->getName(), 1, 0, start_y + (i - *this->menu_offset) * 8);
+	}
 }
 
 void DisplayHandler::drawText(Adafruit_SSD1306* display, uint8_t* text) {
@@ -48,14 +81,10 @@ void DisplayHandler::drawText(Adafruit_SSD1306* display, uint8_t* text, uint8_t 
 	display->setCursor(posX, posY);
 	display->cp437(true);
 
-	uint8_t line_num = 1;
-
 	for (uint8_t i = 0; text[i] != '\0'; i++) {
-		if (text[i] == '\n') {
-			display->setCursor(posX, posY + size * 8 * line_num);
-			line_num++;
-		} else {
+		if (text[i] == '\n')
+			display->setCursor(posX, display->getCursorY() + size * 8);
+		else
 			display->write(text[i]);
-		}
 	}
 }

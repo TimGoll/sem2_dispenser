@@ -68,6 +68,13 @@ bool MenuElement::isType(uint8_t type) {
 	return type == this->type;
 }
 
+bool MenuElement::isTopLevel() {
+	return this->parent == NULL;
+}
+
+
+
+
 MenuHandler::MenuHandler() {
 	this->menu_offset = 0;
 	this->menu_index = 0;
@@ -79,10 +86,26 @@ MenuHandler::MenuHandler() {
 
 	// REGISTERING MENU ELEMENTS
 	new MenuElement("main", MENU_SUBMENU, menu_none, 8);
-	new MenuElement("some_settings", MENU_ACTION, menu_none->getChild("main"), 8);
-	new MenuElement("some_settings2", MENU_ACTION, menu_none->getChild("main"), 8);
+	new MenuElement("some_settings", MENU_ACTION, menu_none->getChild("main"), 0);
+	new MenuElement("some_settings2", MENU_ACTION, menu_none->getChild("main"), 0);
+	new MenuElement("some_settings3", MENU_ACTION, menu_none->getChild("main"), 0);
+	new MenuElement("some_settings4", MENU_ACTION, menu_none->getChild("main"), 0);
+	new MenuElement("some_settings5", MENU_ACTION, menu_none->getChild("main"), 0);
+	new MenuElement("some_settings6", MENU_ACTION, menu_none->getChild("main"), 0);
+	new MenuElement("some_settings7", MENU_ACTION, menu_none->getChild("main"), 0);
 }
 
+MenuElement** MenuHandler::menuOpenPtr() {
+	return &this->menu_open;
+}
+
+uint8_t* MenuHandler::menuIndexPtr() {
+	return &this->menu_index;
+}
+
+uint8_t* MenuHandler::menuOffsetPtr() {
+	return &this->menu_offset;
+}
 
 // BUTTON CALLBACK FUNCTIONS
 
@@ -94,10 +117,11 @@ static void MenuHandler::buttonNext(MenuHandler* self, uint8_t type) {
 	if (new_open_menu == NULL)
 		return;
 
-	if (not new_open_menu->isType(MENU_SUBMENU))
-		return;
+	if (new_open_menu->isType(MENU_SUBMENU))
+		self->menu_open = new_open_menu;
+	else
+		self->menu_open = self->menu_head;
 
-	self->menu_open = new_open_menu;
 	self->menu_offset = 0;
 	self->menu_index = 0;
 }
