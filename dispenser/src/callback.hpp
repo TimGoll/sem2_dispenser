@@ -31,6 +31,7 @@ class Callback {
 	private:
 		callback_t callback_function;
 		void* callback_scope;
+		bool has_callback;
 };
 
 #endif

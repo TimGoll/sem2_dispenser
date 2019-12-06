@@ -9,6 +9,7 @@
 
 #include "display.hpp"
 #include "buttons.hpp"
+#include "menu.hpp"
 
 class Main {
 	public:
@@ -29,10 +30,7 @@ class Main {
 	private:
 		DisplayHandler* displayHandler;
 		ButtonHandler* buttonHandler;
-
-		uint8_t test;
-
-		static void callbackTest(Main* main_pointer, uint8_t type);
+		MenuHandler* menuHandler;
 };
 
 #endif

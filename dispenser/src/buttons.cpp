@@ -34,7 +34,7 @@ uint16_t Button::getIntervalTime() {
 
 bool Button::isNextInterval() {
 	// no interval callback timing defined
-	if (start_time == 0 and interval_time == 0)
+	if (this->start_time == 0 and this->interval_time == 0)
 		return false;
 
 	// initial time and interval time are passed
@@ -86,7 +86,7 @@ ButtonHandler::~ButtonHandler() {
 }
 
 bool ButtonHandler::addCallback(uint8_t pin_number, uint8_t type, void* callback_scope, callback_t callback) {
-	return this->addCallback(pin_number, type, callback, callback_scope, 0, 0);
+	return this->addCallback(pin_number, type, callback_scope, callback, 0, 0);
 }
 
 bool ButtonHandler::addCallback(uint8_t pin_number, uint8_t type, void* callback_scope, callback_t callback, uint16_t start_time, uint16_t interval_time) {
@@ -101,19 +101,24 @@ bool ButtonHandler::addCallback(uint8_t pin_number, uint8_t type, void* callback
 }
 
 void ButtonHandler::update() {
+	//Serial.println("a");delay(20);
 	for (uint8_t i = 0; i < this->button_amount; i++) {
+		//Serial.println("b");delay(20);
 		Button* button = this->button_list[i];
-
+		//Serial.println("c");delay(20);
 		uint8_t b_state = button->state();
-
+		//Serial.println("d");delay(20);
 		// PRESS / RELEASE MODE
 		if (button->isType(b_state)) {
+			//Serial.println("d2");delay(20);
 			button->runCallback(b_state);
+			//Serial.println("d3");delay(20);
 		}
-
+		//Serial.println("e");delay(20);
 		// HOLD MODE
 		if (b_state == HIGH and button->isNextInterval()) {
 			button->doNextInterval(HIGH);
 		}
+		//Serial.println("f");delay(20);
 	}
 }
