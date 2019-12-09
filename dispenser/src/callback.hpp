@@ -1,5 +1,5 @@
-#ifndef CALLBACK_H
-#define CALLBACK_H
+#ifndef CALLBACK_HPP
+#define CALLBACK_HPP
 
 #include <Arduino.h>
 

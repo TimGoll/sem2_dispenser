@@ -1,5 +1,5 @@
-#ifndef DISPLAY_H
-#define DISPLAY_H
+#ifndef DISPLAY_HPP
+#define DISPLAY_HPP
 
 #include <Arduino.h> // Access to the basic arduino library to make our live easier
 #include <Wire.h>

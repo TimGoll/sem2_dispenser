@@ -13,7 +13,7 @@ MenuElement::MenuElement(uint8_t* name, uint8_t type, MenuElement* parent, uint8
 	}
 
 	// add to parent as a child
-	if (parent != NULL)
+	if (parent != nullptr)
 		parent->addChild(this);
 }
 
@@ -26,13 +26,13 @@ MenuElement* MenuElement::getChild(uint8_t* name) {
 
 MenuElement* MenuElement::getChildAtIndex(uint8_t index) {
 	if (index >= this->children->children_amount)
-		return NULL;
+		return nullptr;
 
 	return this->children->child[index];
 }
 
 bool MenuElement::hasChild(uint8_t* name) {
-	if (this->getChild(name) == NULL)
+	if (this->getChild(name) == nullptr)
 		return false;
 	
 	return true;
@@ -69,7 +69,7 @@ bool MenuElement::isType(uint8_t type) {
 }
 
 bool MenuElement::isTopLevel() {
-	return this->parent == NULL;
+	return this->parent == nullptr;
 }
 
 
@@ -79,7 +79,7 @@ MenuHandler::MenuHandler() {
 	this->menu_offset = 0;
 	this->menu_index = 0;
 
-	MenuElement* menu_none = new MenuElement("HEAD", MENU_SUBMENU, NULL, 8);
+	MenuElement* menu_none = new MenuElement("HEAD", MENU_SUBMENU, nullptr, 8);
 
 	this->menu_head = menu_none;
 	this->menu_open = menu_none;
@@ -114,7 +114,7 @@ static void MenuHandler::buttonNext(MenuHandler* self, uint8_t type) {
 
 	MenuElement* new_open_menu = self->menu_open->getChildAtIndex(self->menu_offset + self->menu_index);
 
-	if (new_open_menu == NULL)
+	if (not new_open_menu)
 		return;
 
 	if (new_open_menu->isType(MENU_SUBMENU))
@@ -129,7 +129,7 @@ static void MenuHandler::buttonNext(MenuHandler* self, uint8_t type) {
 static void MenuHandler::buttonPrev(MenuHandler* self, uint8_t type) {
 	MenuElement* new_open_menu = self->menu_open->getParent();
 
-	if (new_open_menu == NULL)
+	if (not new_open_menu)
 		return;
 
 	self->menu_open = new_open_menu;

@@ -1,5 +1,5 @@
-#ifndef BUTTONS_H
-#define BUTTONS_H
+#ifndef BUTTONS_HPP
+#define BUTTONS_HPP
 
 #include <Arduino.h>
 
