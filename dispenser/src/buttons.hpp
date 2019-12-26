@@ -3,7 +3,7 @@
 
 #include <Arduino.h>
 
-#include "callback.hpp"
+#include "lib/callback/callback.hpp"
 
 #define MAX_AMOUNT_BUTTONS 8
 
@@ -131,6 +131,8 @@ class ButtonHandler {
 		*/
 		/**************************************************************************/
 		void update();
+
+		template <typename CLASS> void test_setup(CLASS class_ref);
 
 	private:
 		Button* button_list[MAX_AMOUNT_BUTTONS];

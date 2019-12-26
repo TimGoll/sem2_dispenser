@@ -34,7 +34,7 @@ MenuElement* MenuElement::getChildAtIndex(uint8_t index) {
 bool MenuElement::hasChild(uint8_t* name) {
 	if (this->getChild(name) == nullptr)
 		return false;
-	
+
 	return true;
 }
 

@@ -93,6 +93,7 @@ bool ButtonHandler::addCallback(uint8_t pin_number, uint8_t type, void* callback
 	if (this->button_amount == MAX_AMOUNT_BUTTONS)
 		return false;
 
+	//TODO add additional callback if button is already created
 	this->button_list[this->button_amount] = new Button(pin_number, type, start_time, interval_time);
 	this->button_list[this->button_amount]->registerCallback(callback_scope, callback);
 	this->button_amount++;
