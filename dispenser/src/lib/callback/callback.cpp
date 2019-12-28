@@ -1,9 +1,9 @@
 #include "callback.hpp"
 
-Callback::Callback() {
+Callback::Callback(uint8_t max_amount) {
 	this->cb__amount = 0;
-	this->cb__max_amount = MAX_CALLBACK_AMOUNT;
-	this->cb__list = new CallbackInternal*[MAX_CALLBACK_AMOUNT];
+	this->cb__max_amount = max_amount;
+	this->cb__list = new CallbackInternal*[max_amount];
 }
 
 Callback::~Callback() {

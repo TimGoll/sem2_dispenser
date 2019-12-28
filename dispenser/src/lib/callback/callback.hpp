@@ -3,8 +3,6 @@
 
 #include <Arduino.h>
 
-#define MAX_CALLBACK_AMOUNT 4
-
 //defining a type for the callback function
 typedef void (*callback_t)(void*, uint8_t);
 
@@ -49,7 +47,7 @@ namespace {
 
 class Callback {
 	public:
-		Callback();
+		Callback(uint8_t max_amount);
 		~Callback();
 
 		/**************************************************************************/
@@ -62,7 +60,10 @@ class Callback {
 		bool registerCallback(void* scope, callback_t function);
 
 		template <typename PARAM>
-		void runCallback(PARAM value);
+		bool runCallback(PARAM value);
+
+		template <typename PARAM>
+		bool runCallback(PARAM value, uint8_t id);
 
 	private:
 		CallbackInternal** cb__list;
@@ -71,12 +72,27 @@ class Callback {
 };
 
 template <typename PARAM>
-void Callback::runCallback(PARAM value) {
+bool Callback::runCallback(PARAM value) {
 	if (this->cb__amount == 0)
-		return;
+		return false;
 
 	for (uint8_t i = 0; i < this->cb__amount; i++)
 		this->cb__list[i]->runCallbackInternal(value);
+
+	return true;
+}
+
+template <typename PARAM>
+bool Callback::runCallback(PARAM value, uint8_t id) {
+	if (this->cb__amount == 0)
+		return false;
+
+	if (id >= this->cb__amount)
+		return false;
+
+	this->cb__list[id]->runCallbackInternal(value);
+
+	return true;
 }
 
 #endif

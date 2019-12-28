@@ -1,6 +1,6 @@
 #include "buttons.hpp"
 
-Button::Button(uint8_t pin_number, uint8_t type, uint16_t start_time, uint16_t interval_time) {
+Button::Button(uint8_t pin_number, uint8_t type, uint16_t start_time, uint16_t interval_time) : Callback(4) {
 	this->pin_number = pin_number;
 	this->type = type;
 	this->start_time = start_time;

@@ -1,6 +1,6 @@
 #include "menu.hpp"
 
-MenuElement::MenuElement(uint8_t* name, uint8_t type, MenuElement* parent, uint8_t max_children_amount = 0) {
+MenuElement::MenuElement(uint8_t* name, uint8_t type, MenuElement* parent, uint8_t max_children_amount = 0) : Callback(1) {
 	this->name = name;
 	this->type = type;
 	this->parent = parent;
