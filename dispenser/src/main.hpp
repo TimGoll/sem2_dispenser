@@ -32,8 +32,7 @@ class Main {
 		DisplayHandler* displayHandler;
 		ButtonHandler* buttonHandler;
 		MenuHandler* menuHandler;
-
-		DataPoints* dataPoints;
+		DataHub* dataHub;
 };
 
 #endif

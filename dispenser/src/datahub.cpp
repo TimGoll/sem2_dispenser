@@ -185,6 +185,10 @@ void DataHub::writeToSD() {
 	while (true) {
 		bool is_valid = this->runCallback(dataPoints, id);
 
+		// make sure there is still a registered hook
+		if (not is_valid)
+			return;
+
 		uint8_t data_line[dataPoints->getMaxLineSize()];
 
 		dataPoints->getDataLine(data_line);
@@ -193,9 +197,6 @@ void DataHub::writeToSD() {
 
 		delete dataPoints;
 		dataPoints = new DataPoints(DATA_SIZE);
-
-		if (not is_valid)
-			return;
 
 		id++;
 	}

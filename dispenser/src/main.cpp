@@ -8,7 +8,12 @@ Main::Main() {
 	this->buttonHandler = new ButtonHandler();
 	this->displayHandler = new DisplayHandler();
 	this->menuHandler = new MenuHandler();
+	this->dataHub = new DataHub();
 
+	// READ LAST DATA FROM CARD
+	this-dataHub->readFromSD();
+
+	// SET UP DISPLAY
 	displayHandler->init(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_ADDRESS);
 	displayHandler->setMenu(
 		this->menuHandler->menuOpenPtr(),
@@ -21,7 +26,7 @@ Main::Main() {
 	this->buttonHandler->addCallback(11, RISING, this->menuHandler, &MenuHandler::buttonNext);
 	this->buttonHandler->addCallback(12, RISING, this->menuHandler, &MenuHandler::buttonDown, 1000, 100);
 	this->buttonHandler->addCallback(13, RISING, this->menuHandler, &MenuHandler::buttonUp, 1000, 100);
- };
+};
 
 Main::~Main() {
 	delete this->buttonHandler;
