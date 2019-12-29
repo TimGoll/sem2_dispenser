@@ -2,7 +2,7 @@
 
 DataPoints::DataPoints(uint8_t max_data_points) {
 	this->string_pos = 0;
-	this->line_size = max_data_points * 2 * 8;
+	this->line_size = max_data_points * 2 * 8 + 1;
 
 	this->data_line = new uint8_t[this->line_size];
 	this->prefix = new uint8_t[5];
@@ -19,8 +19,6 @@ void DataPoints::getPrefix(uint8_t* prefix) {
 
 void DataPoints::setPrefix(uint8_t* prefix) {
 	strcpy(this->prefix, prefix);
-
-	this->string_pos = 0; //TODO remove
 }
 
 bool DataPoints::getNextDataPoint(uint8_t* type, uint8_t* data) {
@@ -97,18 +95,25 @@ void DataPoints::setDataLine(uint8_t* line) {
 	}
 }
 
+void DataPoints::addDataChar(uint8_t new_char) {
+	this->data_line[this->string_pos] = new_char;
+	this->string_pos++;
+}
+
+void DataPoints::completeDataLine() {
+	this->data_line[this->string_pos] = '\0';
+	this->string_pos = 0;
+
+	// it is safe here to overwrite itself since there is a prefix offset
+	this->setDataLine(this->data_line);
+}
+
+uint8_t DataPoints::getMaxLineSize() {
+	return this->line_size;
+}
+
 DataHub::DataHub() : Callback(8) {
-	this->card = new Sd2Card();
-	this->volume = new SdVolume();
-	this->file_root = new SdFile();
-
-	this->card->init(SPI_HALF_SPEED, CHIP_SELECT);
-
-	this->volume->init(this->card);
-
-	this->file_root->openRoot(this->volume);
-
-	//open or create config file
+	this->card_available = SD.begin(CHIP_SELECT);
 }
 
 DataHub::~DataHub() {
@@ -116,9 +121,87 @@ DataHub::~DataHub() {
 }
 
 void DataHub::readFromSD() {
-	// read one line at a time and pass data as DataPoints object to the reader via callback
+	// make sure a SD card was found and is valid
+	if (not this->card_available)
+		return;
+
+	// open the data file if existent
+	File file = SD.open("data.txt", FILE_READ);
+
+	// stop here if file was not found
+	if (not file)
+		return;
+
+	// create a new data points structure
+	DataPoints* dataPoints = new DataPoints(DATA_SIZE);
+
+	// read the file stream until it ends
+	while (file.available() > 0) {
+		uint8_t new_char = (uint8_t) file.read();
+
+		if (new_char == '\n') {
+			dataPoints->completeDataLine();
+
+			this->runCallback(dataPoints);
+			
+			delete dataPoints;
+
+			dataPoints = new DataPoints(DATA_SIZE);
+		} else {
+			dataPoints->addDataChar(new_char);
+		}
+	}
+
+	// when file end is reached, the last data point is reached as well
+	dataPoints->completeDataLine();
+
+	this->runCallback(dataPoints);
+
+	delete dataPoints;
+
+	// close the file
+	file.close();
 }
 
 void DataHub::writeToSD() {
-	// write one line at a time and call callbacks individually and pass an empty data object each time
+	// make sure a SD card was found and is valid
+	if (not this->card_available)
+		return;
+
+	// remove existing data file
+	SD.remove("data.txt");
+
+	// create new data file
+	File file = SD.open("data.txt", FILE_WRITE);
+
+	// stop here if file was not found
+	if (not file)
+		return;
+
+	// create a new data points structure
+	DataPoints* dataPoints = new DataPoints(DATA_SIZE);
+
+	uint8_t id = 0;
+	while (true) {
+		bool is_valid = this->runCallback(dataPoints, id);
+
+		uint8_t data_line[dataPoints->getMaxLineSize()];
+
+		dataPoints->getDataLine(data_line);
+
+		file.println((char) data_line);
+
+		delete dataPoints;
+		dataPoints = new DataPoints(DATA_SIZE);
+
+		if (not is_valid)
+			return;
+
+		id++;
+	}
+
+	delete dataPoints;
+
+	// close the file
+	file.close();
 }

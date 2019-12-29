@@ -14,6 +14,8 @@
 // MKRZero SD: SDCARD_SS_PIN
 #define CHIP_SELECT 4
 
+#define DATA_SIZE 8
+
 class DataPoints {
 	public:
 		DataPoints(uint8_t max_data_points);
@@ -30,6 +32,12 @@ class DataPoints {
 		void getDataLine(uint8_t* line);
 
 		void setDataLine(uint8_t* line);
+
+		void addDataChar(uint8_t new_char);
+
+		void completeDataLine();
+
+		uint8_t getMaxLineSize();
 
 	private:
 		uint8_t string_pos;
@@ -51,9 +59,7 @@ class DataHub : Callback {
 		void writeToSD();
 
 	private:
-		Sd2Card* card;
-		SdVolume* volume;
-		SdFile* file_root;
+		bool card_available;
 };
 
 #endif
