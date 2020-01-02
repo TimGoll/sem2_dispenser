@@ -11,6 +11,7 @@
 #include "buttons.hpp"
 #include "menu.hpp"
 #include "datahub.hpp"
+#include "pillhandler.hpp"
 
 class Main {
 	public:

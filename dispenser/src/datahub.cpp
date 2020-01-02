@@ -21,6 +21,10 @@ void DataPoints::setPrefix(uint8_t* prefix) {
 	strcpy(this->prefix, prefix);
 }
 
+void DataPoints::isPrefix(uint8_t* prefix) {
+	return strcmp(this->prefix, prefix) == 0;
+}
+
 bool DataPoints::getNextDataPoint(uint8_t* type, uint8_t* data) {
 	bool is_type = true;
 	uint8_t type_pos = 0;

@@ -11,7 +11,7 @@ Main::Main() {
 	this->dataHub = new DataHub();
 
 	// READ LAST DATA FROM CARD
-	this-dataHub->readFromSD();
+	this->dataHub->readFromSD();
 
 	// SET UP DISPLAY
 	displayHandler->init(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_ADDRESS);

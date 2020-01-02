@@ -25,6 +25,8 @@ class DataPoints {
 
 		void setPrefix(uint8_t* prefix);
 
+		bool isPrefix(uint8_t* prefix);
+
 		bool getNextDataPoint(uint8_t* type, uint8_t* data);
 
 		void setNextDataPoint(uint8_t* type, uint8_t* data);
