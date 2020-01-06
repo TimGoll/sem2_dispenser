@@ -1,15 +1,16 @@
 #ifndef PILLHANDLER_HPP
 #define PILLHANDLER_HPP
 
+#include <Arduino.h>
 #include <RTClib.h>
 
-#include "datahub.hpp"
+#include "eeprom.hpp"
 
 #define MAX_AMOUNT_PILLSTACKS 2
 
 class PillStack {
 	public:
-		PillStack(uint8_t max_amount);
+		PillStack();
 		~PillStack();
 
 		void setPillAmount(uint8_t amount);
@@ -32,7 +33,7 @@ class PillHandler {
 		PillHandler();
 		~PillHandler();
 
-		static void deserializeData(PillHandler* self, DataPoints* data);
+		uint16_t readData(uint16_t start_index);
 
 	private:
 		uint8_t* data_prefix;

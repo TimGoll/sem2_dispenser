@@ -1,6 +1,6 @@
 #include "pillhandler.hpp"
 
-PillStack::PillStack(uint8_t max_amount) {
+PillStack::PillStack() {
 
 }
 
@@ -33,26 +33,31 @@ uint32_t PillStack::getPillInterval() {
 }
 
 PillHandler::PillHandler() {
-	self->data_prefix = "PILL";
+	this->data_index = 0;
 }
 
 PillHandler::~PillHandler() {
-
+	this->pillStack[0] = new PillStack();
+	this->pillStack[1] = new PillStack();
 }
 
-static void PillStack::deserializeData(PillHandler* self, DataPoints* data) {
-	if (not data->isPrefix(self->data_prefix))
-		return;
+uint16_t PillHandler::readData(uint16_t index) {
+	// cache storage position
+	this->data_index = *index;
 
-	while (true) {
-		uint8_t type[4];
-		uint8_t data[8];
+	// PILL HOLDER A
+	this->pillStack[0]->setPillAmount(EEPROMW->readUInt8(&index));
 
-		// try reading data and stop when no valid data is available
-		if (not this->dataPoints->getNextDataPoint(type, data))
-			break;
+	this->pillStack[0]->setRefTime(EEPROMW->readUInt32(&index));
 
-		// TODO: deserialize data and set this data to the PillStack objects
-		// they should be created by default and not dynamically
-	}
+	this->pillStack[0]->setPillInterval(EEPROMW->readUInt32(&index));
+
+	// PILL HOLDER B
+	this->pillStack[1]->setPillAmount(EEPROMW->readUInt8(&index));
+
+	this->pillStack[1]->setRefTime(EEPROMW->readUInt32(&index));
+
+	this->pillStack[1]->setPillInterval(EEPROMW->readUInt32(&index));
+
+	return index;
 }

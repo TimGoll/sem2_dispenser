@@ -10,8 +10,8 @@
 #include "display.hpp"
 #include "buttons.hpp"
 #include "menu.hpp"
-#include "datahub.hpp"
 #include "pillhandler.hpp"
+#include "eeprom.hpp"
 
 class Main {
 	public:
@@ -33,7 +33,6 @@ class Main {
 		DisplayHandler* displayHandler;
 		ButtonHandler* buttonHandler;
 		MenuHandler* menuHandler;
-		DataHub* dataHub;
 };
 
 #endif

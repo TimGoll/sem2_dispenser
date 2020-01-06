@@ -8,10 +8,14 @@ Main::Main() {
 	this->buttonHandler = new ButtonHandler();
 	this->displayHandler = new DisplayHandler();
 	this->menuHandler = new MenuHandler();
-	this->dataHub = new DataHub();
 
-	// READ LAST DATA FROM CARD
-	this->dataHub->readFromSD();
+	uint16_t address = 0;
+
+	EEPROMW->writeUInt32(&address, 87543);
+
+	address = 0;
+
+	Serial.println(EEPROMW->readUInt32(&address));
 
 	// SET UP DISPLAY
 	displayHandler->init(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_ADDRESS);
