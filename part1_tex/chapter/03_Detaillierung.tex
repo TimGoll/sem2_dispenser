@@ -22,7 +22,7 @@ Das Gehäuse inklusive des Standfußes ist im Querschnitt zusammen mit den wesen
 \end{figure}
 Dabei ist die \textbf{Funktion} des Bauteils den Tablettenauswurf, die Aktoren sowie die Tablettenbehälter zu stützen und in der Höhe zu halten. Auf Basis der Anforderungsliste in \ref{anforderungsliste} und der benötigten mechanischen Eigenschaften können folgende \textbf{Randbedingungen/Constraints} definiert werden:
 \begin{itemize}
-	\item Recyclebares Material
+	\item Material muss recyclebar sein
 	\item Höhe des kritischen Teils/Länge der Platte $L\,=\,180\,$mm
 	\item Material muss ein guter Isolator sein, bzw. $\rho_e\,>\,10^{19}\,\mu\Omega$cm
 	\item CO$_2$-Ausstoß bei der Materialgewinnung $<\,2\,\frac{kg\,(\text{CO}_2)}{kg\,(\text{Material})}$
@@ -59,26 +59,49 @@ Eliminieren von $b$ führt in \ref{eingesetzt} schließlich zu
 K\,=\,\underbrace{\left(\frac{3\,M_b\,L^5\,h^3}{2\,w_{\text{max}}}\right)^{\frac{1}{3}}}_\text{vorgegeben, bzw. geometrieabhängig}\,\frac{C_m\,\rho}{E^{\frac{1}{3}}}\,.
 \end{equation}
 Damit ist die \textbf{Zielfunktion} mit
-\begin{equation} \label{zielfkt}
-P_{\text{CR}}\,=\,\frac{1}{K}\,=\,\frac{E^\frac{1}{3}}{C_m\,\rho}
+\begin{equation} \label{zielfkt1}
+P_{\text{CR}}^{3.1}\,=\,\frac{1}{K}\,=\,\frac{E^\frac{1}{3}}{C_m\,\rho}
 \end{equation}
-definiert, wobei $P_{\text{CR}}$ zu maximieren ist.\\
-CES-materialselection ...\\
+definiert, wobei $P_{\text{CR}}^{3.1}$ zu maximieren ist.\\
+CES-materialselection ...
 
-\section{Trichterförmige Tablettenrutsche}
-Die Funktion
-
+\section{Tablettenrutsche}
+Die Tablettenrutsche besitzt die wesentliche \textbf{Funktion} die aus der Lagerung geschobenen Vitamintabletten mittels Schwerkraft entlang einer Bahn in ein bereitgestellten Trinkbehälter zu überführen. Für die Werkstoffauswahl liegen folgenden \textbf{Randbedingungen/Constraints} vor:
 \begin{itemize}
 	\item Material muss generativ bzw. additiv fertigbar sein
-	\item CO$_2$-Ausstoß bei der Materialgewinnung $<\,2\,\frac{kg\,(\text{CO}_2)}{kg\,(\text{Material})}$
 	\item Material muss recyclebar sein
-	\item 
+	\item Plattengeometrie: Trapezförmiger Querschnitt (gleichschenklig und symmetrisch, Grundseite $l_1\,=\,34\,$mm, Grundseite $l_2\,=\,100\,$mm, Höhe $h\,=\,40\,$mm)
+	\item Plattendicke $3\,=\,mm$
 \end{itemize}
-Maximiere spezifische Festigkeit für 
+Das \textbf{Ziel} der Werkstoffwahl liegt in der Minimierung des CO$_2$-Ausstoßes bei der Materialgewinnung unter Erfüllung der minimalen spezifischen Festigkeit, die gewährleistet, dass trotz der hohen Zahl an Auswurfzyklen die Bauteilstruktur nicht beeinflusst wird. \textbf{Freie Variable} ist in dem Auslegungsprozess die Wahl des Materials.\\
+Aufgrund der vorgegebenen Plattengeometrie gilt für den CO$_2$-Ausstoß beim Materialgewinnung
+\begin{equation}
+\text{CO}_2^{ges}\,=\,\text{CO}_2\,m\,=\,\text{CO}_2\,\rho\,V\,=\,\text{CO}_2\,\rho\,A\,d\,=\,\text{CO}_2\,\rho\,\frac{1}{2}\,(l_1\,+\,l_2)\,h\,d\,.
+\end{equation}
+Für die Bruchlast gilt bei Biegebeanspruchung der Platte:
+\begin{equation}
+F_B\,=\,C\,\frac{I\,\sigma_f}{y_m\,h}\,
+\end{equation}
+dabei ist $C$ eine Konstante, die abhängig von der genauen Belastung ist. Da der Belastungszustand jedoch sehr variabel ist und für die nachfolgende Rechnung nicht näher spezifiziert 
+Masse mit Energie in der Produktion als Faktor zu Dichte\\
+\begin{equation} \label{zielfkt2}
+P_{\text{CR}}^{3.2}\,=\,\frac{\sigma_f^\frac{1}{2}}{\text{CO}_2\,\rho} (Seite 510 ca)
+\end{equation}
 
 \section{Tablettenlagerung}
+
+Die \textbf{Funktion} dieses Bauteils stellt das sichere Lagern der Vitamintabletten sowie dem Zulassen einer optischen Prüfung des Füllstandes dar. Zur Erfüllung dieser Funktion sind folgenden \textbf{Randbedingungen/Constraints} gegeben:
 \begin{itemize}
-	\item Durchsichtiges/transparentes Material
-	\item 
+	\item Material muss durchsichtig/transparent sein
+	\item Bauteilhöhe $l\,=\,200\,$mm
+	\item Innenradius des Lagerungszylinders $r\,=\,14\,$mm
+	\item Steifigkeit: Kein Umknicken bei Befüllung
+	\item Festigkeit: Keine plastische Verformung bei Befüllung
+	\item CO$_2$-Ausstoß bei der Materialgewinnung $<\,2\,\frac{kg\,(\text{CO}_2)}{kg\,(\text{Material})}$
 \end{itemize}
-Minimiere CO2 für ausreichende Biegesteifigkeit
+Das \textbf{Ziel} der Werkstoffauswahl ist die Minimierung des Produktionsenergie für eine ausreichende Biegesteifigkeit. \textbf{Freie Variable} ist die Wahl des Materials.\\
+Biegebalken aber mit Querschnitt für Rohr\\
+Masse mit Faktor für C02 zu Dichte
+\begin{equation} \label{zielfkt3}
+P_{\text{CR}}^{3.3}\,=\,\frac{E^\frac{1}{2}}{E_p\,\rho} (Seite 432 Beam)
+\end{equation}
