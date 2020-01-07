@@ -23,9 +23,11 @@ Das Gehäuse inklusive des Standfußes ist im Querschnitt zusammen mit den wesen
 Dabei ist die \textbf{Funktion} des Bauteils den Tablettenauswurf, die Aktoren sowie die Tablettenbehälter zu stützen und in der Höhe zu halten. Auf Basis der Anforderungsliste in \ref{anforderungsliste} und der benötigten mechanischen Eigenschaften können folgende \textbf{Randbedingungen/Constraints} definiert werden:
 \begin{itemize}
 	\item Material muss recyclebar sein
-	\item Höhe des kritischen Teils/Länge der Platte $L\,=\,180\,$mm
 	\item Material muss ein guter Isolator sein, bzw. $\rho_e\,>\,10^{19}\,\mu\Omega$cm
-	\item CO$_2$-Ausstoß bei der Materialgewinnung $<\,2\,\frac{kg\,(\text{CO}_2)}{kg\,(\text{Material})}$
+	\item CO$_2$-Ausstoß bei der Materialgewinnung $<\,2\,\frac{\text{kg}\,(\text{CO}_2)}{\text{kg}\,(\text{Material})}$
+	\item Spezifische Festigkeit $>\,5\,\frac{\text{kN}\,\text{m}}{\text{kg}}$
+	\item Bruchzähigkeit $>\,1\,\text{MPa}\,\sqrt{\text{m}}$
+	\item Höhe des kritischen Teils/Länge der Platte $L\,=\,180\,$mm
 	\item Biegesteifigkeit $S$ so, dass bei Einleitung der Kraft $F_{res}$ das an der Platte resultierende Biegemoment $M_b$ eine maximale Durchbiegung $w_{\text{max}}$ zur Folge hat
 \end{itemize}
 Das \textbf{Ziel} der Werkstoffauswahl ist die Reduzierung der Kosten für das Gehäuse. Als \textbf{freie Variablen} treten dabei zum einen die Querschnittfläche der rückwandigen Platte, welche durch Konzeptleichtbau im Verlauf des Produktdesigns optimiert werden kann, zum anderen die Wahl des Materials.
@@ -56,7 +58,7 @@ Einsetzen von \ref{flächenträgheitsmoment} in \ref{durchbiegung} und \ref{flä
 \end{equation}
 Eliminieren von $b$ führt in \ref{eingesetzt} schließlich zu
 \begin{equation}\label{performance}
-K\,=\,\underbrace{\left(\frac{3\,M_b\,L^5\,h^3}{2\,w_{\text{max}}}\right)^{\frac{1}{3}}}_\text{vorgegeben, bzw. geometrieabhängig}\,\frac{C_m\,\rho}{E^{\frac{1}{3}}}\,.
+K\,=\,\underbrace{\left(\frac{3\,M_b\,L^5\,h^3}{2\,w_{\text{max}}}\right)^{\frac{1}{3}}}_{\text{konstanter Vorfaktor}}\,\frac{C_m\,\rho}{E^{\frac{1}{3}}}\,.
 \end{equation}
 Damit ist die \textbf{Zielfunktion} mit
 \begin{equation} \label{zielfkt1}
@@ -68,25 +70,54 @@ CES-materialselection ...
 \section{Tablettenrutsche}
 Die Tablettenrutsche besitzt die wesentliche \textbf{Funktion} die aus der Lagerung geschobenen Vitamintabletten mittels Schwerkraft entlang einer Bahn in ein bereitgestellten Trinkbehälter zu überführen. Für die Werkstoffauswahl liegen folgenden \textbf{Randbedingungen/Constraints} vor:
 \begin{itemize}
-	\item Material muss generativ bzw. additiv fertigbar sein
 	\item Material muss recyclebar sein
-	\item Plattengeometrie: Trapezförmiger Querschnitt (gleichschenklig und symmetrisch, Grundseite $l_1\,=\,34\,$mm, Grundseite $l_2\,=\,100\,$mm, Höhe $h\,=\,40\,$mm)
-	\item Plattendicke $3\,=\,mm$
+	\item Material muss generativ bzw. additiv fertigbar sein
+	\item Material muss ein guter Isolator sein, bzw. $\rho_e\,>\,10^{19}\,\mu\Omega$cm
+	\item Plattengeometrie: Trapezförmiger Querschnitt (gleichschenklig und symmetrisch, Höhe $h\,=\,40\,$mm, Dicke $3\,=\,mm$
 \end{itemize}
-Das \textbf{Ziel} der Werkstoffwahl liegt in der Minimierung des CO$_2$-Ausstoßes bei der Materialgewinnung unter Erfüllung der minimalen spezifischen Festigkeit, die gewährleistet, dass trotz der hohen Zahl an Auswurfzyklen die Bauteilstruktur nicht beeinflusst wird. \textbf{Freie Variable} ist in dem Auslegungsprozess die Wahl des Materials.\\
-Aufgrund der vorgegebenen Plattengeometrie gilt für den CO$_2$-Ausstoß beim Materialgewinnung
+Das \textbf{Ziel} der Werkstoffwahl liegt in der Minimierung des CO$_2$-Ausstoßes bei der Materialgewinnung unter Erfüllung der minimalen spezifischen Festigkeit, die gewährleistet, dass trotz der hohen Zahl an Auswurfzyklen die Bauteilstruktur nicht beeinflusst wird und keine Risse an der Oberfläche auftreten. \textbf{Freie Variable} ist in dem Auslegungsprozess die Wahl des Materials sowie die Länge $l_1$ und $l_2$ der beiden Grundseiten des Trapez'.\\
+Aufgrund der vorgegebenen Plattengeometrie gilt für den CO$_2$-Ausstoß beim Materialgewinnung in Abhängigkeit der Masse
+\begin{equation}\label{masse32}
+\text{CO}_2^{ges}\,=\,\text{CO}_2^F\,m\,=\,\text{CO}_2^F\,\rho\,V\,=\,\text{CO}_2^F\,\rho\,\frac{1}{2}\,(l_1\,+\,l_2)\,h\,d\,.
+\end{equation}
+Für die Normalspannung in der Randfaser der Platte gilt
 \begin{equation}
-\text{CO}_2^{ges}\,=\,\text{CO}_2\,m\,=\,\text{CO}_2\,\rho\,V\,=\,\text{CO}_2\,\rho\,A\,d\,=\,\text{CO}_2\,\rho\,\frac{1}{2}\,(l_1\,+\,l_2)\,h\,d\,.
+\sigma\,=\,\frac{M}{I}\,z\,.
 \end{equation}
-Für die Bruchlast gilt bei Biegebeanspruchung der Platte:
+Dabei ist $M$ das Biegemoment, $I$ das Flächenträgheitsmoment und $z$ der Abstand der Randfaser von der neutralen Faser. Damit an der Oberfläche des Bauteils keine Risse auftreten, darf die Spannung $\sigma$ nicht die Bruchfestigkeit $\sigma_f$ überschreiten
+\begin{equation}\label{bruchfestigkeit32}
+\sigma\,=\,\frac{M}{I}\,z\,\le\,\sigma_f\,.
+\end{equation}
+Für den zugrundeliegenden Lastfall folgt für das Biegemoment
+\begin{equation}\label{lastfall32}
+M\,=\,F\,\cos(45)\,h=\,F\,\frac{\sqrt{2}}{2}\,h
+\end{equation}
+Unter der Berücksichtigung der Plattengeometrie gilt für den Abstand $z$ der Randfaser zur neutralen Faser
+\begin{equation}\label{geometrie32}
+z\,=\,\frac{d}{2}
+\end{equation}
+Das Flächenträgheitsmoment an entspricht im Krafteinleitungspunkt:
+\begin{equation}\label{flächen32}
+I\,=\,\frac{\frac{1}{2}\,(l_1\,+\,l_2)\,d^3}{12}\,=\frac{(l_1\,+\,l_2)\,d^3}{24}
+\end{equation}
+Einsetzen von \ref{lastfall32}, \ref{geometrie32} und \ref{flächen32} in \ref{bruchfestigkeit32} liefert
+\begin{equation}\label{eingesetzt32}
+\sigma_f\,\ge\,\frac{24\,\sqrt{2}\,F}{4\,(l_1\,+l_2)\,d^3}\,h\,d\,=\,\frac{6\,\sqrt{2}\,F\,h}{(l_1\,+\,l_2)d^2}
+\end{equation}
+Schlussendlich führt Eliminierung der freien Variable $(l_1\,+\,l_2)$ in \ref{masse32} und \ref{eingesetzt32}
 \begin{equation}
-F_B\,=\,C\,\frac{I\,\sigma_f}{y_m\,h}\,
+\frac{2\,\text{CO}_2^{ges}}{\text{CO}_2^F\,\rho\,h\,d}\,=\,\frac{6\sqrt{2}\,F\,h}{d^2\,\sigma_f}
 \end{equation}
-dabei ist $C$ eine Konstante, die abhängig von der genauen Belastung ist. Da der Belastungszustand jedoch sehr variabel ist und für die nachfolgende Rechnung nicht näher spezifiziert 
-Masse mit Energie in der Produktion als Faktor zu Dichte\\
-\begin{equation} \label{zielfkt2}
-P_{\text{CR}}^{3.2}\,=\,\frac{\sigma_f^\frac{1}{2}}{\text{CO}_2\,\rho} (Seite 510 ca)
+Der gesamte CO$_2$-Ausstoß lässt sich dadurch mit
+\begin{equation}
+\text{CO}_2^{ges}\,=\,\underbrace{\frac{3\,\sqrt{2}\,F\,h^2}{d}}_{\text{konstanter Vorfaktor}}\,\frac{\text{CO}_2^F\,\rho}{\sigma_f}
 \end{equation}
+berechnen.
+Damit ergibt sich die Performance-Gleichung
+\begin{equation} \label{zielfkt32}
+P_{\text{CR}}^{3.2}\,=\,\frac{1}{\text{CO}_2^{ges}}\,=\,\frac{\sigma_f}{\text{CO}_2^F\,\rho}\,,
+\end{equation}
+deren Materialindex zu maximieren ist.
 
 \section{Tablettenlagerung}
 
@@ -94,14 +125,43 @@ Die \textbf{Funktion} dieses Bauteils stellt das sichere Lagern der Vitamintable
 \begin{itemize}
 	\item Material muss durchsichtig/transparent sein
 	\item Bauteilhöhe $l\,=\,200\,$mm
-	\item Innenradius des Lagerungszylinders $r\,=\,14\,$mm
+	\item Innenradius des Lagerungsrohrs $r\,=\,14\,$mm
 	\item Steifigkeit: Kein Umknicken bei Befüllung
 	\item Festigkeit: Keine plastische Verformung bei Befüllung
 	\item CO$_2$-Ausstoß bei der Materialgewinnung $<\,2\,\frac{kg\,(\text{CO}_2)}{kg\,(\text{Material})}$
 \end{itemize}
-Das \textbf{Ziel} der Werkstoffauswahl ist die Minimierung des Produktionsenergie für eine ausreichende Biegesteifigkeit. \textbf{Freie Variable} ist die Wahl des Materials.\\
-Biegebalken aber mit Querschnitt für Rohr\\
-Masse mit Faktor für C02 zu Dichte
-\begin{equation} \label{zielfkt3}
-P_{\text{CR}}^{3.3}\,=\,\frac{E^\frac{1}{2}}{E_p\,\rho} (Seite 432 Beam)
+Das \textbf{Ziel} der Werkstoffauswahl ist die Minimierung des Produktionsenergie für eine ausreichende Biegesteifigkeit. \textbf{Freie Variable} ist die Wahl des Materials sowie der Außenradius $R$ des Rohrs.\\
+Die während der Produktion gesamt verbrauchte Energie ist mit
+\begin{equation}\label{energie33}
+H^{ges}\,=\,H_p\,m\,=\,H_p\,\rho\,l\,A\,=\,H_p\,\rho\,l\,\pi\,\left(R^2\,-\,r^2\right)\,\approx\,c_1\,H_p\,\rho\,l\,\pi\,R^2
 \end{equation}
+definiert. Da der Innenradius $r$ bekannt ist, kann er näherungsweise durch einen konstanter Vorfaktor in der Rechnung ausgetauscht werden.\\
+Bei dem gegebenen Lastfall handelt es sich als Lastfall um die Knickung des Rohres. Nach der Theorie des Eulerschen Knickstabes lässt sich die kritische Last $F_{krit}$ bei der es zum Knick kommt mit
+\begin{equation}\label{fkrit33}
+F_{krit}\,=\,\frac{\pi^2\,E\,I}{l^2}\,\ge\,F\,,
+\end{equation}
+berechnen, wobei die real-angreifende Last $F$ geringer sein muss.
+Das Flächenträgheitsmoment für den Rohrquerschnitt ist durch
+\begin{equation}\label{flächen33}
+I\,=\,\frac{\pi}{4}\,\left(R^4\,-\,r^4\right)\,\approx\,c_2\,\frac{\pi}{4}\,R^4
+\end{equation}
+definiert. Auch hier geht $r$ nur als Konstante mit ein und kann in einem Produktausdruck durch einen weiteren konstanten Faktor $c_2$ ersetzt werden. Einsetzen von \ref{flächen33} in \ref{fkrit33} liefert
+\begin{equation}
+F\,\le\,\frac{\pi^2\,E\,c_2\,\frac{\pi}{4}\,R^4}{l^2}\,=\,\frac{c_2\,\pi^3\,E\,R^4}{4\,l^2}
+\end{equation}
+Eliminieren der freien Variable $R$ führt schließlich im Grenzfall $F\,=\,F_{krit}$ zu
+\begin{equation}
+F\,=\,\frac{c_2\,\pi^3\,E\,R^4}{4\,l^2}\,=\,\frac{c_2\,\pi^3\,E\,H_{ges}^2}{4\,c_1^2\,l^2\,H_p^2\,\rho^2\,l^2\,\pi}\,=\,\frac{c_2\,\pi\,E\,H_{ges}^2}{4\,c_1^2\,l^3\,\rho^2\,H_p^2}
+\end{equation}
+Die gesamt aufgewendete Energie in der Produktion lässt sich damit durch
+\begin{equation}
+H_{ges}\,=\,\underbrace{\left(\frac{4\,c_1^2\,l^3\,F}{c_2\,\pi}\right)^\frac{1}{2}}_{\text{konstanter Vorfaktor}}\,\frac{\rho\,H_p}{E^\frac{1}{2}}
+\end{equation}
+berechnen.
+Dadurch ergibt sich die Performance-Gleichung
+\begin{equation} \label{zielfkt3}
+P_{\text{CR}}^{3.3}\,=\,\frac{1}{H_{ges}}\,=\,\frac{E^\frac{1}{2}}{H_p\,\rho}\,,
+\end{equation}
+deren Materialindex zu maximieren ist.
+
+\section{Aktoren}
