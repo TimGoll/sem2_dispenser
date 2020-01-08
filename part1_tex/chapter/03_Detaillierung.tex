@@ -2,12 +2,12 @@
 % !TeX root = ../Vitamintablettenspender.tex
 
 \chapter{Methodische Werkstoffauswahl}
-Von der Produktentwicklung werden leistungsfähige Systeme bei gleichzeitiger Erfüllung von Sicherheits- und Umweltverträglichkeitsanforderungen erwartet. Steigenden Kosten für Material und Energie werden im Zuge des Multi-Material-Designs mittels einer methodischen Werkstoffauswahl durch die \glqq Ashby-Methode\glqq{} und den dabei entstehenden intelligenten Lösungen entgegengewirkt. Dabei werden unterschiedlichste Aspekte wie die Möglichkeit zur generativen Fertigung bzw. dem Additive Manufacturing berücksichtigt. Die Auslegung der Hauptkomponenten des Produktes unterliegt den jeweils gültigen Randbedingungen und ihren zu erfüllenden Funktionen und werden hinsichtlich ihrer freien Variablen untersucht und bezüglich der Werkstoffauswahl optimiert. Eine \glqq Performance-Rechnung\grqq{} ermöglicht die Einbeziehung von mathematischen und physikalischen Formeln zur Entmystifizierung der Werkstofffaktoren. In der kommerziellen Software CES Selector der Firma Granta Design Ltd. (Cambridge, Vereinigtes Königreich), die von Michael Ashby, dem Erfinder der Ashby-Methode, gegründet wurde, wird mittels einer computergestützten Datenbank auf Basis der Performance-Rechnung die fünf besten in Frage kommenden Werkstofflösungen ermittelt, woraus die optimale Werkstofflösung durch \glqq weiche\grqq{} Faktoren resultiert.\\
-Für die Anwendung der Ashby-Methode muss zunächst die Hauptfunktion des Bauteils bestimmt werden. Darauffolgend müssen Randbedingungen sog. Constraints definiert werden, auf Basis derer ein Ziel zur Optimierung gesetzt wird. Dabei treten freie Variablen auf, die während des Designprozesses des Produktes variiert werden können. Die Randbedingungen liefern im Allgemeinen numerische Gleichungen die einen Performance-Index implizieren. Ein höherer Performance-Index bedeutet konventionell ein besseres Material.\\
-Im Folgenden wird das Prinzip von Ashby zur Materialauswahl auf die vier Hauptkomponenten des Systems angewandt.
+Von der Produktentwicklung werden leistungsfähige Systeme bei gleichzeitiger Erfüllung von Sicherheits- und Umweltverträglichkeitsanforderungen erwartet. Steigenden Kosten für Material und Energie werden im Zuge des Multi-Material-Designs mittels einer methodischen Werkstoffauswahl durch die \glqq Ashby-Methode\glqq{} und den dabei entstehenden intelligenten Lösungen entgegengewirkt. Dabei werden unterschiedlichste Aspekte wie die Möglichkeit zur generativen Fertigung bzw. dem Additive Manufacturing berücksichtigt. Die Auslegung der Hauptkomponenten des Produktes unterliegt den jeweils gültigen Randbedingungen und ihren zu erfüllenden Funktionen und werden hinsichtlich ihrer freien Variablen untersucht und bezüglich der Werkstoffauswahl optimiert. Eine \glqq Performance-Rechnung\grqq{} ermöglicht die Einbeziehung von mathematischen und physikalischen Formeln zur Entmystifizierung der Werkstofffaktoren. In der kommerziellen Software CES Selector der Firma Granta Design Ltd. (Cambridge, Vereinigtes Königreich), die von Michael Ashby, dem Erfinder der Ashby-Methode, gegründet wurde, wird mittels einer computergestützten Datenbank auf Basis der Performance-Rechnung die fünf besten in Frage kommenden Werkstofflösungen mit ihren Materialindizees ermittelt, woraus die optimale Werkstofflösung durch \glqq weiche\grqq{} Faktoren resultiert.\\
+Für die Anwendung der Ashby-Methode muss zunächst die Hauptfunktion des Bauteils bestimmt werden. Darauffolgend müssen Randbedingungen definiert werden, auf Basis derer ein Ziel zur Optimierung gesetzt wird. Dabei treten freie Variablen auf, die während des Designprozesses des Produktes variiert werden können. Die Randbedingungen liefern im Allgemeinen numerische Gleichungen die einen Performance-Index implizieren. Ein höherer Performance-Index bedeutet konventionell ein besseres Material.\\
+Im Folgenden wird das Prinzip von Ashby zur Materialauswahl auf die vier Hauptkomponenten des Systems angewandt. Dabei handelt es sich zunächst um das Gehäuse, worin der Standfuß, die Rückwand sowie die Oberseite zusammengefasst werden. Ein weiteres Bauteil, das der Werkstoffoptimierung unterzogen wird, ist die Tablettenrutsche, an die die ausgeworfenen Tabletten übergeben und zum Trinkbehälter transportiert werden. Dritte Hauptkomponente stellt die rohrförmige, transparente Tablettenlagerung. Zum Schluss werden die Aktoren, welche sich aus Pleuelstangen und einem Tablettenschieber zusammensetzen untersucht.
 
-\section{Standfuß und Gehäuse}
-Das Gehäuse inklusive des Standfußes ist im Querschnitt zusammen mit den wesentlich angreifenden Lasten in Abb. \ref{fig:0301skizze} (a) dargestellt. Die Streckenlast $q_0$ fasst die Gewichtskräfte des Tablettenauswurfs, der Aktoren sowie der Behälter für die Lagerung der Tabletten zusammen. Die Einspannung am unteren Ende symbolisiert die Lagerung des Bauteils an der Oberfläche. Eine geeignete Abstraktion des Systems wird durch die Reduzierung der Streckenlast sowie der Einspannung auf zwei resultierende Kräfte in \ref{fig:0301skizze} (a) beschrieben. Darin ist die Kraft $F_{res}$ die Resultierende aus der Streckenlast und greift im Schwerpunkt der Last an. Die Einspannung am unteren Ende reduziert sich zu der für die Berechnung wesentlichen vertikalen Komponente $F_{L,V}$. Unter Vernachlässigung des Eigengewichts des Bauteils gilt näherungsweise $F_{res}\,\approx\,F_{L,V}$. Die Werkstoffauswahl und die Optimierung einer Zielfunktion kann für den dargestellten kritischen Teil des Gehäuse stellvertretend für die gesamte Struktur vorgenommen werden.
+\section{Standfuß und Gehäuse}\label{section:3.1}
+Das Gehäuse inklusive des Standfußes sowie der Oberseite zum Anschrauben der übrigen Bauteile ist im Querschnitt zusammen mit den wesentlich angreifenden Lasten in Abb. \ref{fig:0301skizze} (a) dargestellt. Die Streckenlast $q_0$ fasst die Gewichtskräfte der Tablettenrutsche, der Aktoren sowie der Behälter für die Lagerung der Tabletten zusammen. Die Einspannung am unteren Ende symbolisiert die Lagerung des Bauteils an der Oberfläche. Eine geeignete Abstraktion des Systems wird durch die Reduzierung der Streckenlast sowie der Einspannung auf zwei resultierende Kräfte in \ref{fig:0301skizze} (a) beschrieben. Darin ist die Kraft $F_{res}$ die Resultierende aus der Streckenlast und greift im Schwerpunkt der Last an. Die Einspannung am unteren Ende reduziert sich zu der für die Berechnung wesentlichen vertikalen Komponente $F_{L,V}$. Unter Vernachlässigung des Eigengewichts des Bauteils gilt näherungsweise $F_{res}\,\approx\,F_{L,V}$. Die Werkstoffauswahl und die Optimierung einer Zielfunktion kann für den dargestellten kritischen Teil des Gehäuse stellvertretend für die gesamte Struktur vorgenommen werden.
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=1.0\linewidth]{chapter/Bilder/0301skizze}
@@ -20,7 +20,7 @@ Das Gehäuse inklusive des Standfußes ist im Querschnitt zusammen mit den wesen
 	\caption{Abstrahiertes Modell einer Platte unter reiner Biegung mit dem Biegemoment $M_b$}
 	\label{fig:0301model}
 \end{figure}
-Dabei ist die \textbf{Funktion} des Bauteils den Tablettenauswurf, die Aktoren sowie die Tablettenbehälter zu stützen und in der Höhe zu halten. Auf Basis der Anforderungsliste in \ref{anforderungsliste} und der benötigten mechanischen Eigenschaften können folgende \textbf{Randbedingungen/Constraints} definiert werden:
+Dabei ist die \textbf{Funktion} des Bauteils die Tablettenrutsche, die Aktoren sowie die Tablettenbehälter zu stützen und in der Höhe zu halten. Auf Basis der Anforderungsliste in \ref{anforderungsliste} und der benötigten mechanischen Eigenschaften können folgende \textbf{Randbedingungen} definiert werden:
 \begin{itemize}
 	\item Material muss recyclebar sein
 	\item Material muss ein guter Isolator sein, bzw. $\rho_e\,>\,10^{19}\,\mu\Omega$cm
@@ -35,7 +35,7 @@ Dadurch, dass die Biegesteifigkeit $S$ sowie die Höhe der Platte $L$ vorgegeben
 \begin{equation}
 	E\,I\,w''(x)\,=\,-\,M_b\,
 \end{equation}
-durch zweifaches Integrieren, Umstellen und Einsetzen unter Vernachlässigung des Vorzeichens, das ausschließlich für die Richtung der Durchbiegung berücksichtigt werden muss:
+durch zweifaches Integrieren, Umstellen und Einsetzen unter Vernachlässigung des Vorzeichens, das ausschließlich für die Richtung der Durchbiegung berücksichtigt werden muss, folgt:
 \begin{equation} \label{durchbiegung}
 	w\,\left(\frac{L}{2}\right)\,=\,\frac{M_b \,L^2}{8\,E\,I}\,\le\,w_{\text{max}},
 \end{equation}
@@ -60,53 +60,75 @@ Eliminieren von $b$ führt in \ref{eingesetzt} schließlich zu
 \begin{equation}\label{performance}
 K\,=\,\underbrace{\left(\frac{3\,M_b\,L^5\,h^3}{2\,w_{\text{max}}}\right)^{\frac{1}{3}}}_{\text{konstanter Vorfaktor}}\,\frac{C_m\,\rho}{E^{\frac{1}{3}}}\,.
 \end{equation}
-Damit ist die \textbf{Zielfunktion} mit
-\begin{equation} \label{zielfkt1}
+Die \textbf{Zielfunktion} ist damit durch
+\begin{equation} \label{performance31}
 P_{\text{CR}}^{3.1}\,=\,\frac{1}{K}\,=\,\frac{E^\frac{1}{3}}{C_m\,\rho}
 \end{equation}
-definiert, wobei $P_{\text{CR}}^{3.1}$ zu maximieren ist.\\
-CES-materialselection ...
+definiert, wobei der Materialindex $P_{\text{CR}}^{3.1}$ zu maximieren ist. Dabei stellen hohe Werte von $P_{\text{CR}}^{3.1}$ einen idealen Kompromiss aus Kosten und Biegesteifigkeit dar.\\
+Logarithmieren von \ref{performance31} liefert die Beziehung
+\begin{equation}
+\underbrace{3\,\ln(P_{\text{CR}}^{3.1})}_{=\,\text{konst.}}\,=\,\ln(E)\,-\,3\,\ln(C_m\,\rho)\,,
+\end{equation}
+wodurch sich mittels der Ashby-Methode in den Graph des logarithmierten Elastizitäsmodul über die logarithmierten Kosten eine Gerade der Steigung 3 legen lässt, welche einen variablen y-Achsenabstand in Abhängigkeit des Materialindex' aufweist.\\
+Grafik CES 3-1-1\\
+Hinzufügen der Randbedingungen "Recyclebares Material", "geringer CO$_2$-Ausstoß" sowie Eintragen der Gerade aus der logarithmierten Performance-Gleichung eliminiert einige Materialien.\\
+Grafik CES 3-1-2\\
+Unter Berücksichtigung der übrigen Randbedingungen hinsichtlich der elektrischen und mechanischen Materialeigenschaften entfernt weitere Materialien.\\
+Grafik CES 3-1-4\\
+Erhöhung des y-Achsenabschnittes der Gerade führt zur Vernachlässigung aller Materialien, die unterhalb von ihr liegen. Das am besten geeignete Material wird zuletzt von der Gerade eliminiert und weist den höchsten Performance-Index $P_{\text{CR}}^{3.1}$ auf.\\
+Grafik CES 3-1-5\\
+Die fünf geeignetsten Materialien werden hierdurch ausfindig gemacht und sind wie folgt klassifiziert:
+\begin{itemize}
+\item[1)] Polypropylen (PP, Materialindex: 9,4547e$^{-4}$)
+\item[2)] Polyethylen (PE, HD - high density, 7,29316e$^{-4}$)
+\item[3)] Polyethylen (PE, LD - low density, 5,55704e$^{-4}$)
+\item[4)] Polyvinylchlorid (PVC, 4,47917e$^{-4}$)
+\item[5)] Natron- und kaligeschmelztes Glas (3,30562e$^{-4}$)
+\end{itemize}
+Dementsprechend fällt ohne weitere Einschränkung oder offensichtliche Nachteile die Wahl des Materials für das Gehäuse auf Polypropylen.
 
 \section{Tablettenrutsche}
-Die Tablettenrutsche besitzt die wesentliche \textbf{Funktion} die aus der Lagerung geschobenen Vitamintabletten mittels Schwerkraft entlang einer Bahn in ein bereitgestellten Trinkbehälter zu überführen. Für die Werkstoffauswahl liegen folgenden \textbf{Randbedingungen/Constraints} vor:
+Die Tablettenrutsche besitzt die wesentliche \textbf{Funktion} die aus der Lagerung geschobenen Vitamintabletten mittels Schwerkraft entlang einer Bahn in ein bereitgestellten Trinkbehälter zu überführen. Sie wird direkt an das Gehäuse geschraubt und an ihr sind mehrere elektronische Bauteile, wie u.a. Taster und die Servomotoren, befestigt, daher erfährt hier die elektrische Resistivität eine erhöhte Bedeutung. Für die Werkstoffauswahl liegen insgesamt folgenden \textbf{Randbedingungen} vor:
 \begin{itemize}
 	\item Material muss recyclebar sein
 	\item Material muss generativ bzw. additiv fertigbar sein
 	\item Material muss ein guter Isolator sein, bzw. $\rho_e\,>\,10^{19}\,\mu\Omega$cm
 	\item Plattengeometrie: Trapezförmiger Querschnitt (gleichschenklig und symmetrisch, Höhe $h\,=\,40\,$mm, Dicke $3\,=\,mm$
 \end{itemize}
-Das \textbf{Ziel} der Werkstoffwahl liegt in der Minimierung des CO$_2$-Ausstoßes bei der Materialgewinnung unter Erfüllung der minimalen spezifischen Festigkeit, die gewährleistet, dass trotz der hohen Zahl an Auswurfzyklen die Bauteilstruktur nicht beeinflusst wird und keine Risse an der Oberfläche auftreten. \textbf{Freie Variable} ist in dem Auslegungsprozess die Wahl des Materials sowie die Länge $l_1$ und $l_2$ der beiden Grundseiten des Trapez'.\\
+Das \textbf{Ziel} der Werkstoffwahl liegt in der Minimierung des CO$_2$-Ausstoßes bei der Materialgewinnung unter Erfüllung der minimalen spezifischen Bruchfestigkeit, die gewährleistet, dass trotz der hohen Zahl an Auswurfzyklen der Tabletten und dem dabei wirkenden Biegemoment die Bauteilstruktur nicht beeinflusst wird und keine Risse an der Oberfläche auftreten. \textbf{Freie Variable} ist in dem Auslegungsprozess die Wahl des Materials sowie die Längen $l_1$ und $l_2$ der beiden Grundseiten der Trapezquerschnittsfläche.\\
 Aufgrund der vorgegebenen Plattengeometrie gilt für den CO$_2$-Ausstoß beim Materialgewinnung in Abhängigkeit der Masse
 \begin{equation}\label{masse32}
 \text{CO}_2^{ges}\,=\,\text{CO}_2^F\,m\,=\,\text{CO}_2^F\,\rho\,V\,=\,\text{CO}_2^F\,\rho\,\frac{1}{2}\,(l_1\,+\,l_2)\,h\,d\,.
 \end{equation}
 Für die Normalspannung in der Randfaser der Platte gilt
 \begin{equation}
-\sigma\,=\,\frac{M}{I}\,z\,.
+\sigma\,=\,\frac{M_b}{I}\,z\,.
 \end{equation}
-Dabei ist $M$ das Biegemoment, $I$ das Flächenträgheitsmoment und $z$ der Abstand der Randfaser von der neutralen Faser. Damit an der Oberfläche des Bauteils keine Risse auftreten, darf die Spannung $\sigma$ nicht die Bruchfestigkeit $\sigma_f$ überschreiten
+Dabei ist $M_b$ das Biegemoment, $I$ das Flächenträgheitsmoment und $z$ der Abstand der Randfaser von der neutralen Faser. Damit an der Oberfläche des Bauteils keine Risse auftreten, darf die Spannung $\sigma$ nicht die Bruchfestigkeit $\sigma_f$ überschreiten
 \begin{equation}\label{bruchfestigkeit32}
-\sigma\,=\,\frac{M}{I}\,z\,\le\,\sigma_f\,.
+\sigma\,=\,\frac{M_b}{I}\,z\,\le\,\sigma_f\,.
 \end{equation}
-Für den zugrundeliegenden Lastfall folgt für das Biegemoment
+Die Anordnung des Bauteils, auf der die weitere Rechnung basiert ist in Abbildung ?? dargestellt. \\
+Abbildung Lastfall\\
+Es folgt für das Biegemoment
 \begin{equation}\label{lastfall32}
-M\,=\,F\,\cos(45)\,h=\,F\,\frac{\sqrt{2}}{2}\,h
+M\,=\,F\,\cos(45)\,h=\,F\,\frac{\sqrt{2}}{2}\,h\,.
 \end{equation}
-Unter der Berücksichtigung der Plattengeometrie gilt für den Abstand $z$ der Randfaser zur neutralen Faser
+Unter Berücksichtigung der Plattengeometrie gilt für den Abstand $z$ der Randfaser zur neutralen Faser
 \begin{equation}\label{geometrie32}
-z\,=\,\frac{d}{2}
+z\,=\,\frac{d}{2}\,.
 \end{equation}
-Das Flächenträgheitsmoment an entspricht im Krafteinleitungspunkt:
+Das Flächenträgheitsmoment des Querschnittes entspricht im Krafteinleitungspunkt:
 \begin{equation}\label{flächen32}
-I\,=\,\frac{\frac{1}{2}\,(l_1\,+\,l_2)\,d^3}{12}\,=\frac{(l_1\,+\,l_2)\,d^3}{24}
+I\,=\,\frac{\frac{1}{2}\,(l_1\,+\,l_2)\,d^3}{12}\,=\frac{(l_1\,+\,l_2)\,d^3}{24}\,.
 \end{equation}
 Einsetzen von \ref{lastfall32}, \ref{geometrie32} und \ref{flächen32} in \ref{bruchfestigkeit32} liefert
 \begin{equation}\label{eingesetzt32}
-\sigma_f\,\ge\,\frac{24\,\sqrt{2}\,F}{4\,(l_1\,+l_2)\,d^3}\,h\,d\,=\,\frac{6\,\sqrt{2}\,F\,h}{(l_1\,+\,l_2)d^2}
+\sigma_f\,\ge\,\frac{24\,\sqrt{2}\,F}{4\,(l_1\,+l_2)\,d^3}\,h\,d\,=\,\frac{6\,\sqrt{2}\,F\,h}{(l_1\,+\,l_2)d^2}\,.
 \end{equation}
-Schlussendlich führt Eliminierung der freien Variable $(l_1\,+\,l_2)$ in \ref{masse32} und \ref{eingesetzt32}
+Schlussendlich führt Eliminierung der freien Variable $(l_1\,+\,l_2)$ in \ref{masse32} und \ref{eingesetzt32} auf
 \begin{equation}
-\frac{2\,\text{CO}_2^{ges}}{\text{CO}_2^F\,\rho\,h\,d}\,=\,\frac{6\sqrt{2}\,F\,h}{d^2\,\sigma_f}
+\frac{2\,\text{CO}_2^{ges}}{\text{CO}_2^F\,\rho\,h\,d}\,=\,\frac{6\sqrt{2}\,F\,h}{d^2\,\sigma_f}\,.
 \end{equation}
 Der gesamte CO$_2$-Ausstoß lässt sich dadurch mit
 \begin{equation}
@@ -117,11 +139,20 @@ Damit ergibt sich die Performance-Gleichung
 \begin{equation} \label{zielfkt32}
 P_{\text{CR}}^{3.2}\,=\,\frac{1}{\text{CO}_2^{ges}}\,=\,\frac{\sigma_f}{\text{CO}_2^F\,\rho}\,,
 \end{equation}
-deren Materialindex zu maximieren ist.
+deren Materialindex $P_{\text{CR}}^{3.2}$ zu maximieren ist.\\
+Analog zu der Beschreibung in \ref{section:3.1} beschrieben graphischen Umsetzung mittels der Ashby-Methode lässt sich die logarithmierte spezifische Bruchfestigkeit über dem Logarithmus des CO$_2$-Ausstoß einer Volumeneinheit auftragen.\\
+...\\
+Die fünf geeignetsten Materialien werden hierdurch ausfindig gemacht und sind wie folgt klassifiziert: (prüfen!)
+\begin{itemize}
+	\item[1)] Polypropylen (PP, Materialindex: 3,54312)
+	\item[2)] Polyethylen (PE, HD - high density, 2,93544)
+	\item[3)] Styrol-Acrylnitril (SAN, 2,81223)
+	\item[4)] Polystyrol (PS, 2,74717)
+	\item[5)] Polyvinylchlorid (PVC, 2,59588)
+\end{itemize}
 
 \section{Tablettenlagerung}
-
-Die \textbf{Funktion} dieses Bauteils stellt das sichere Lagern der Vitamintabletten sowie dem Zulassen einer optischen Prüfung des Füllstandes dar. Zur Erfüllung dieser Funktion sind folgenden \textbf{Randbedingungen/Constraints} gegeben:
+Die Tablettenlagerung besteht aus Hohlzylindern, die direkt an die Tablettenrutsche geschraubt werden. Die \textbf{Funktion} dieses Bauteils stellt das sichere Lagern der Vitamintabletten sowie dem Zulassen einer optischen Prüfung des Füllstandes dar. Zur Erfüllung dieser Funktion sind folgenden \textbf{Randbedingungen} gegeben:
 \begin{itemize}
 	\item Material muss durchsichtig/transparent sein
 	\item Bauteilhöhe $l\,=\,200\,$mm
@@ -129,14 +160,16 @@ Die \textbf{Funktion} dieses Bauteils stellt das sichere Lagern der Vitamintable
 	\item Steifigkeit: Kein Umknicken bei Befüllung
 	\item Festigkeit: Keine plastische Verformung bei Befüllung
 	\item CO$_2$-Ausstoß bei der Materialgewinnung $<\,2\,\frac{kg\,(\text{CO}_2)}{kg\,(\text{Material})}$
+	\item Preis ??
 \end{itemize}
-Das \textbf{Ziel} der Werkstoffauswahl ist die Minimierung des Produktionsenergie für eine ausreichende Biegesteifigkeit. \textbf{Freie Variable} ist die Wahl des Materials sowie der Außenradius $R$ des Rohrs.\\
+Das \textbf{Ziel} der Werkstoffauswahl ist die Minimierung des Produktionsenergie für eine ausreichende Biegesteifigkeit. \textbf{Freie Variable} ist die Wahl des Materials sowie der Außenradius $R$ des Rohrs. Der Belastungszustand unter dem das Bauteil steht, ist in Abbildung ?? dargestellt. Dabei wird das Rohr an der Unterseite fest eingespannt und während des Befüllvorgangs unter Knickung an der Oberkante belastet.\\
+Abbildung Belatungszustand\\
 Die während der Produktion gesamt verbrauchte Energie ist mit
 \begin{equation}\label{energie33}
 H^{ges}\,=\,H_p\,m\,=\,H_p\,\rho\,l\,A\,=\,H_p\,\rho\,l\,\pi\,\left(R^2\,-\,r^2\right)\,\approx\,c_1\,H_p\,\rho\,l\,\pi\,R^2
 \end{equation}
 definiert. Da der Innenradius $r$ bekannt ist, kann er näherungsweise durch einen konstanter Vorfaktor in der Rechnung ausgetauscht werden.\\
-Bei dem gegebenen Lastfall handelt es sich als Lastfall um die Knickung des Rohres. Nach der Theorie des Eulerschen Knickstabes lässt sich die kritische Last $F_{krit}$ bei der es zum Knick kommt mit
+Da es sich bei dem gegebenen Lastfall, um die Knickung eines Rohres handelt, kann näherungsweise dier Theorie des Eulerschen Knickstabes herangezogen werden. Dadurch lässt sich die kritische Last $F_{krit}$, bei der es zum Knick kommt, mit
 \begin{equation}\label{fkrit33}
 F_{krit}\,=\,\frac{\pi^2\,E\,I}{l^2}\,\ge\,F\,,
 \end{equation}
@@ -147,21 +180,52 @@ I\,=\,\frac{\pi}{4}\,\left(R^4\,-\,r^4\right)\,\approx\,c_2\,\frac{\pi}{4}\,R^4
 \end{equation}
 definiert. Auch hier geht $r$ nur als Konstante mit ein und kann in einem Produktausdruck durch einen weiteren konstanten Faktor $c_2$ ersetzt werden. Einsetzen von \ref{flächen33} in \ref{fkrit33} liefert
 \begin{equation}
-F\,\le\,\frac{\pi^2\,E\,c_2\,\frac{\pi}{4}\,R^4}{l^2}\,=\,\frac{c_2\,\pi^3\,E\,R^4}{4\,l^2}
+F\,\le\,\frac{\pi^2\,E\,c_2\,\frac{\pi}{4}\,R^4}{l^2}\,=\,\frac{c_2\,\pi^3\,E\,R^4}{4\,l^2}\,.
 \end{equation}
 Eliminieren der freien Variable $R$ führt schließlich im Grenzfall $F\,=\,F_{krit}$ zu
 \begin{equation}
-F\,=\,\frac{c_2\,\pi^3\,E\,R^4}{4\,l^2}\,=\,\frac{c_2\,\pi^3\,E\,H_{ges}^2}{4\,c_1^2\,l^2\,H_p^2\,\rho^2\,l^2\,\pi}\,=\,\frac{c_2\,\pi\,E\,H_{ges}^2}{4\,c_1^2\,l^3\,\rho^2\,H_p^2}
+F\,=\,\frac{c_2\,\pi^3\,E\,R^4}{4\,l^2}\,=\,\frac{c_2\,\pi^3\,E\,H_{ges}^2}{4\,c_1^2\,l^2\,H_p^2\,\rho^2\,l^2\,\pi}\,=\,\frac{c_2\,\pi\,E\,H_{ges}^2}{4\,c_1^2\,l^3\,\rho^2\,H_p^2}\,.
 \end{equation}
 Die gesamt aufgewendete Energie in der Produktion lässt sich damit durch
 \begin{equation}
 H_{ges}\,=\,\underbrace{\left(\frac{4\,c_1^2\,l^3\,F}{c_2\,\pi}\right)^\frac{1}{2}}_{\text{konstanter Vorfaktor}}\,\frac{\rho\,H_p}{E^\frac{1}{2}}
 \end{equation}
 berechnen.
-Dadurch ergibt sich die Performance-Gleichung
+Es ergibt sich die Performance-Gleichung
 \begin{equation} \label{zielfkt3}
 P_{\text{CR}}^{3.3}\,=\,\frac{1}{H_{ges}}\,=\,\frac{E^\frac{1}{2}}{H_p\,\rho}\,,
 \end{equation}
-deren Materialindex zu maximieren ist.
+deren Materialindex $P_{\text{CR}}^{3.3}$ zu maximieren ist.
+CES\\ 
 
 \section{Aktoren}
+\textbf{Funktion} Rotatorische Bewegung der Servomotoren in translatorische Bewegung umsetzen und dadurch pro Durchgang eine Tablette aus der Lagerung schieben.\\
+\textbf{Randbedingungen/Constraints}
+\begin{itemize}
+	\item Material muss recyclebar sein
+	\item Material muss ein guter Isolator sein, bzw. $\rho_e\,>\,10^{19}\,\mu\Omega$cm
+\end{itemize}
+\textbf{Ziel} Minimierung der Kosten.\\
+\textbf{Freie Variablen} Wahl des Materials sowie Querschnittfläche des Pleuels.\\
+Für die Gesamtkosten des Pleuels gilt:
+\begin{equation}
+	K\,=\,C_m\,m\,=\,C_m\,\rho\,V\,=\,C_m\,\rho\,A\,l
+\end{equation}
+Die Kosten für den Pleuel können durch Reduzierung der Masse und damit letztendlich durch Reduzierung der Querschnittfläche minimiert werden. Es gilt jedoch, dass die Zugkraft $F$ ausgehalten werden muss, ohne dass eine plastische Verformung eintritt. Daher folgt
+\begin{equation}
+	\frac{F}{A}\,\le\,\sigma_y\,,
+\end{equation}
+wobei $sigma_y$ der Streckgrenze entspricht.
+Durch Eliminierung der Querschnittfläche folgt
+\begin{equation}
+K\,\ge\,C_m\,l\,\,F\,\frac{\rho}{\sigma_y}
+\end{equation}
+Umstellen liefert die Perfomance-Gleichung unter Vernachlässigung fester Parameter
+\begin{equation}\label{performance34}
+P_{CR}^{3.4}\,=\,\frac{1}{K}\,=\,\frac{\sigma_y}{\rho}\,,
+\end{equation}
+wobei $P_{CR}^{3.4}$ der unter den vorgegebenen Randbedingungen der zu maximierende Materialindex ist.
+Logarithmieren von \ref{performance34} liefert
+\begin{equation}\label{logarithmus34}
+\ln{E}\,=\,\ln
+\end{equation}
