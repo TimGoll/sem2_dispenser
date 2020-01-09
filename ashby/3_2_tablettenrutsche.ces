@@ -14,8 +14,8 @@
   <RankByType>4</RankByType>
   <RankByStage>1</RankByStage>
   <RankByProperty />
-  <IndexRankColumn>1</IndexRankColumn>
-  <RankOrder>-1</RankOrder>
+  <IndexRankColumn>0</IndexRankColumn>
+  <RankOrder>1</RankOrder>
   <Database>
     <Path>D:\Programme\CES EduPack 2019\Database\Sustainability Level 3\data.gdb</Path>
     <Name>Level 3 Sustainability</Name>
