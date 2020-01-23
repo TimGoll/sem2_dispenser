@@ -48,14 +48,14 @@ void PillHandler::readData(uint16_t* index) {
 	// PILL HOLDER A
 	this->pillStack[0]->setPillAmount(EEPROMW->readUInt8(index));
 
-	this->pillStack[0]->setRefTime(EEPROMW->readUInt32(index));
+	this->pillStack[0]->setPillRefTime(EEPROMW->readUInt32(index));
 
 	this->pillStack[0]->setPillInterval(EEPROMW->readUInt32(index));
 
 	// PILL HOLDER B
 	this->pillStack[1]->setPillAmount(EEPROMW->readUInt8(index));
 
-	this->pillStack[1]->setRefTime(EEPROMW->readUInt32(index));
+	this->pillStack[1]->setPillRefTime(EEPROMW->readUInt32(index));
 
 	this->pillStack[1]->setPillInterval(EEPROMW->readUInt32(index));
 }
