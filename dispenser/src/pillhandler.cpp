@@ -41,23 +41,25 @@ PillHandler::~PillHandler() {
 	this->pillStack[1] = new PillStack();
 }
 
-uint16_t PillHandler::readData(uint16_t index) {
-	// cache storage position
+void PillHandler::readData(uint16_t* index) {
+	// cache storage position for later data update
 	this->data_index = *index;
 
 	// PILL HOLDER A
-	this->pillStack[0]->setPillAmount(EEPROMW->readUInt8(&index));
+	this->pillStack[0]->setPillAmount(EEPROMW->readUInt8(index));
 
-	this->pillStack[0]->setRefTime(EEPROMW->readUInt32(&index));
+	this->pillStack[0]->setRefTime(EEPROMW->readUInt32(index));
 
-	this->pillStack[0]->setPillInterval(EEPROMW->readUInt32(&index));
+	this->pillStack[0]->setPillInterval(EEPROMW->readUInt32(index));
 
 	// PILL HOLDER B
-	this->pillStack[1]->setPillAmount(EEPROMW->readUInt8(&index));
+	this->pillStack[1]->setPillAmount(EEPROMW->readUInt8(index));
 
-	this->pillStack[1]->setRefTime(EEPROMW->readUInt32(&index));
+	this->pillStack[1]->setRefTime(EEPROMW->readUInt32(index));
 
-	this->pillStack[1]->setPillInterval(EEPROMW->readUInt32(&index));
+	this->pillStack[1]->setPillInterval(EEPROMW->readUInt32(index));
+}
 
-	return index;
+void PillHandler::update() {
+	
 }

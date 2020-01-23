@@ -1,21 +1,20 @@
 #include "main.hpp"
 
 #define SCREEN_WIDTH 128 // OLED display width, in pixels
-#define SCREEN_HEIGHT 32 // OLED display height, in pixels
+#define SCREEN_HEIGHT 64 // OLED display height, in pixels
 #define SCREEN_ADDRESS 0x3C
 
 Main::Main() {
+	// CREATING CLASS INSTANCES
 	this->buttonHandler = new ButtonHandler();
 	this->displayHandler = new DisplayHandler();
 	this->menuHandler = new MenuHandler();
+	this->pillHandler = new PillHandler();
 
-	uint16_t address = 0;
+	// READING DATA FROM EEPROM
+	uint16_t eeprom_index = 0;
 
-	EEPROMW->writeUInt32(&address, 87543);
-
-	address = 0;
-
-	Serial.println(EEPROMW->readUInt32(&address));
+	this->pillHandler->readData(&eeprom_index);
 
 	// SET UP DISPLAY
 	displayHandler->init(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_ADDRESS);
@@ -36,11 +35,13 @@ Main::~Main() {
 	delete this->buttonHandler;
 	delete this->displayHandler;
 	delete this->menuHandler;
+	delete this->pillHandler;
 }
 
 bool Main::update() {
 	this->displayHandler->update();
 	this->buttonHandler->update();
+	this->pillHandler->update();
 
 	return true;
 }

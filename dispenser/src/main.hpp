@@ -33,6 +33,7 @@ class Main {
 		DisplayHandler* displayHandler;
 		ButtonHandler* buttonHandler;
 		MenuHandler* menuHandler;
+		PillHandler* pillHandler;
 };
 
 #endif

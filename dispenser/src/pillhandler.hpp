@@ -24,6 +24,12 @@ class PillStack {
 		uint32_t getPillRefTime();
 
 		uint32_t getPillInterval();
+
+		bool isPillReady();
+
+		bool isPillReadyFirstTime();
+
+		void setContainerState(bool state);
 	private:
 	
 };
@@ -33,10 +39,12 @@ class PillHandler {
 		PillHandler();
 		~PillHandler();
 
-		uint16_t readData(uint16_t start_index);
+		void readData(uint16_t* start_index);
+
+		void update();
 
 	private:
-		uint8_t* data_prefix;
+		uint8_t data_index;
 
 		PillStack* pillStack[MAX_AMOUNT_PILLSTACKS];
 };
