@@ -25,10 +25,12 @@ Main::Main() {
 	);
 
 	// REGISTERING MENU BUTTON CALLBACKS
-	this->buttonHandler->addCallback(2, RISING, this->menuHandler, &MenuHandler::buttonPrev);
-	this->buttonHandler->addCallback(3, RISING, this->menuHandler, &MenuHandler::buttonNext);
-	this->buttonHandler->addCallback(4, RISING, this->menuHandler, &MenuHandler::buttonDown, 1000, 100);
-	this->buttonHandler->addCallback(5, RISING, this->menuHandler, &MenuHandler::buttonUp, 1000, 100);
+	this->buttonHandler->addCallback(10, RISING, this->menuHandler, &MenuHandler::buttonPrev);
+	this->buttonHandler->addCallback(11, RISING, this->menuHandler, &MenuHandler::buttonNext);
+	this->buttonHandler->addCallback(12, RISING, this->menuHandler, &MenuHandler::buttonDown, 1000, 100);
+	this->buttonHandler->addCallback(13, RISING, this->menuHandler, &MenuHandler::buttonUp, 1000, 100);
+
+	this->buttonHandler->addCallback(52, RISING, this->pillHandler, &PillHandler::containerPlaced);
 };
 
 Main::~Main() {
