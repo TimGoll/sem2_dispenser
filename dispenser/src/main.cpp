@@ -5,6 +5,16 @@
 #define SCREEN_ADDRESS 0x3C
 
 Main::Main() {
+	// SETTING UP RTC
+	RTC->begin();
+
+	if (not RTC->isrunning()) {
+		Serial.println("ERROR: RTC is not running!");
+
+		// stay stuck if no RTC is available
+		while (true);
+	}
+
 	// CREATING CLASS INSTANCES
 	this->buttonHandler = new ButtonHandler();
 	this->displayHandler = new DisplayHandler();

@@ -12,6 +12,7 @@
 #include "menu.hpp"
 #include "pillhandler.hpp"
 #include "eeprom.hpp"
+#include "rtc.hpp"
 
 class Main {
 	public:
