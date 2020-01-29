@@ -7,6 +7,7 @@
 #include <Adafruit_SSD1306.h>
 
 #include "menu.hpp"
+#include "rtc.hpp"
 
 #define DRAWTIME 100 //ms
 

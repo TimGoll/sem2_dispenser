@@ -30,16 +30,19 @@ void DisplayHandler::update() {
 	if (millis() - this->last_draw <= DRAWTIME)
 		return;
 
+	// get current time
+	DateTime time = RTC->now();
+
 	this->display->clearDisplay();
 
 	// draw common graphics
-	this->drawText(this->display, "MON");
+	this->drawText(this->display, DAYS[time.dayOfTheWeek()]);
 
 	char buffer[21];
-	if (millis() % 2000 >= 1000)
-		sprintf(buffer, "%02d:%02d", 12, 24);
+	if (time.unixtime() % 2 >= 1)
+		sprintf(buffer, "%02d:%02d", time.hour(), time.minute());
 	else
-		sprintf(buffer, "%02d %02d", 12, 24);
+		sprintf(buffer, "%02d %02d", time.hour(), time.minute());
 	
 	this->drawText(this->display, buffer, 1, 98, 0);
 

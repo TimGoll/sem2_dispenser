@@ -5,4 +5,6 @@
 
 extern RTC_DS1307* RTC;
 
+extern char DAYS[7][4];
+
 #endif
