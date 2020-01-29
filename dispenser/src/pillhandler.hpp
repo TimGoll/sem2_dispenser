@@ -6,6 +6,7 @@
 #include <Servo.h>
 
 #include "eeprom.hpp"
+#include "rtc.hpp"
 
 #define MAX_AMOUNT_PILLSTACKS 2
 
@@ -35,11 +36,11 @@ class PillStack {
 
 		void update();
 
-		bool isPillReadyFirstTime();
-
 		void setContainerState(bool state);
 
 		void throwPill();
+
+		void createFakeTrigger();
 	private:
 		uint8_t pill_amount;
 		uint32_t pill_ref_time;
@@ -51,6 +52,10 @@ class PillStack {
 
 		uint32_t retraction_time;
 
+		uint8_t pin;
+
+		bool pill_ready;
+
 		Servo *servo;
 };
 
@@ -58,6 +63,8 @@ class PillHandler {
 	public:
 		PillHandler();
 		~PillHandler();
+
+		void createFakeTrigger();
 
 		void readData(uint16_t* start_index);
 

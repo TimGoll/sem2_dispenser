@@ -41,6 +41,9 @@ Main::Main() {
 	this->buttonHandler->addCallback(13, RISING, this->menuHandler, &MenuHandler::buttonUp, 1000, 100);
 
 	this->buttonHandler->addCallback(52, RISING, this->pillHandler, &PillHandler::containerPlaced);
+
+	// add a debug button to prepare a fake pill event
+	this->buttonHandler->addCallback(53, RISING, this, &Main::prepareCustomPill);
 };
 
 Main::~Main() {
@@ -56,4 +59,9 @@ bool Main::update() {
 	this->pillHandler->update();
 
 	return true;
+}
+
+static void Main::prepareCustomPill(Main* self, uint8_t type) {
+	Serial.println("Inserting fake pill event");
+	self->pillHandler->createFakeTrigger();
 }

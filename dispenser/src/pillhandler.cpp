@@ -1,10 +1,14 @@
 #include "pillhandler.hpp"
 
 PillStack::PillStack(uint8_t pin) {
+	this->pin = pin;
+
 	this->servo = new Servo();
 	this->servo->attach(pin);
 
 	this->retraction_time = 0;
+
+	this->pill_ready = false;
 }
 
 PillStack::~PillStack() {
@@ -39,10 +43,21 @@ uint32_t PillStack::getPillInterval() {
 }
 
 bool PillStack::isPillReady() {
-	return true; //TODO
+	return pill_ready;
 }
 
 void PillStack::update() {
+	// get current time
+	DateTime time = RTC->now();
+
+	if (not this->pill_ready and time.unixtime() >= this->pill_ref_time) {
+		this->pill_ready = true;
+
+		// start beeper
+		tone(8, 1000, 750);
+		Serial.println("pill ready!");
+	}
+
 	if (millis() > this->retraction_time) {
 		this->servo->write(POS_PILL_IN);
 	} else {
@@ -60,6 +75,9 @@ void PillStack::throwPill() {
 	// decrease pill amount
 	this->pill_amount -= 1;
 
+	// pill is no longer ready
+	this->pill_ready = false;
+
 	// update EEPROM storage
 
 	// we have to cache the index variables here since writeUint modifies it
@@ -67,6 +85,24 @@ void PillStack::throwPill() {
 	uint16_t i_pill_ref_time_ = this->i_pill_ref_time;
 
 	EEPROMW->writeUInt8(&i_pill_amount_, this->pill_amount);
+	EEPROMW->writeUInt32(&i_pill_ref_time_, this->pill_amount);
+}
+
+void PillStack::createFakeTrigger() {
+	Serial.print(this->pin);
+	Serial.println(" - Creating fake trigger.");
+
+	// get current time
+	DateTime time = RTC->now();
+
+	// create a fake pill ready event in 15 seconds
+	this->pill_ref_time = time.unixtime() + 15;
+
+	// update EEPROM storage
+
+	// we have to cache the index variables here since writeUint modifies it
+	uint16_t i_pill_ref_time_ = this->i_pill_ref_time;
+
 	EEPROMW->writeUInt32(&i_pill_ref_time_, this->pill_amount);
 }
 
@@ -81,6 +117,11 @@ PillHandler::PillHandler() {
 
 PillHandler::~PillHandler() {
 	
+}
+
+void PillHandler::createFakeTrigger() {
+	// create a fake trigger for one of the both pillStacks
+	this->pillStack[random(0, 2)]->createFakeTrigger();
 }
 
 void PillHandler::readData(uint16_t* index) {

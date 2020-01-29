@@ -30,6 +30,8 @@ class Main {
 		/**************************************************************************/
 		bool update();
 
+		static void prepareCustomPill(Main* self, uint8_t type);
+
 	private:
 		DisplayHandler* displayHandler;
 		ButtonHandler* buttonHandler;
