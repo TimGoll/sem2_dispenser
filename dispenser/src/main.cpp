@@ -27,12 +27,16 @@ Main::Main() {
 	this->pillHandler->readData(&eeprom_index);
 
 	// SET UP DISPLAY
-	displayHandler->init(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_ADDRESS);
-	displayHandler->setMenu(
+	this->displayHandler->init(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_ADDRESS);
+	this->displayHandler->setMenu(
 		this->menuHandler->menuOpenPtr(),
 		this->menuHandler->menuIndexPtr(),
-		this->menuHandler->menuOffsetPtr()
+		this->menuHandler->menuOffsetPtr(),
+		this->pillHandler
 	);
+
+	// GIVE MENU HANDLER ACCESS TO PILL DATA
+	this->menuHandler->setObjectPointer(this->pillHandler);
 
 	// REGISTERING MENU BUTTON CALLBACKS
 	this->buttonHandler->addCallback(10, RISING, this->menuHandler, &MenuHandler::buttonPrev);

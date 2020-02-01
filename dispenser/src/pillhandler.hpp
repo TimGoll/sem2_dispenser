@@ -72,6 +72,12 @@ class PillHandler {
 
 		static void containerPlaced(PillHandler* self, uint8_t type);
 
+		uint8_t getPillAmount(uint8_t id);
+
+		uint32_t getPillRefTime(uint8_t id);
+
+		uint32_t getPillInterval(uint8_t id);
+
 	private:
 		uint8_t data_index;
 

@@ -6,6 +6,7 @@
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
 
+#include "pillhandler.hpp"
 #include "menu.hpp"
 #include "rtc.hpp"
 
@@ -28,7 +29,7 @@ class DisplayHandler {
 		/**************************************************************************/
 		void init(uint8_t width, uint8_t height, uint8_t address);
 
-		void setMenu(MenuElement** menu_open, uint8_t* menu_index, uint8_t* menu_offset);
+		void setMenu(MenuElement** menu_open, uint8_t* menu_index, uint8_t* menu_offset, PillHandler* pill_handler);
 
 		/**************************************************************************/
 		/*!
@@ -54,6 +55,7 @@ class DisplayHandler {
 		MenuElement** menu_open;
 		uint8_t* menu_index;
 		uint8_t* menu_offset;
+		PillHandler* pill_handler;
 };
 
 #endif

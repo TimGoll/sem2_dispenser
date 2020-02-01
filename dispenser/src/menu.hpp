@@ -5,6 +5,9 @@
 
 #include "lib/callback/callback.hpp"
 
+#include "pillhandler.hpp"
+#include "rtc.hpp"
+
 #define MENU_ACTION 0
 #define MENU_SUBMENU 1
 
@@ -31,11 +34,15 @@ class MenuElement : public Callback {
 		bool addChild(MenuElement* child);
 		uint8_t* getName();
 		uint8_t getType();
+		void setName(uint8_t* name);
+		uint8_t* getText();
+		void setText(uint8_t* text);
 		bool isType(uint8_t type);
 		bool isTopLevel();
 
 	private:
 		uint8_t* name;
+		uint8_t* text;
 		uint8_t type;
 		MenuElement* parent;
 		children_t* children;
@@ -46,6 +53,8 @@ class MenuHandler {
 		MenuHandler();
 		~MenuHandler();
 
+		static void updateContents(MenuHandler* self, uint8_t type);
+
 		static void buttonNext(MenuHandler* self, uint8_t type);
 		static void buttonPrev(MenuHandler* self, uint8_t type);
 		static void buttonUp(MenuHandler* self, uint8_t type);
@@ -55,12 +64,16 @@ class MenuHandler {
 		uint8_t* menuIndexPtr();
 		uint8_t* menuOffsetPtr();
 
+		void setObjectPointer(PillHandler* pillHandler);
+
 	private:
 		MenuElement* menu_open;
 		MenuElement* menu_head;
 
 		uint8_t menu_offset;
 		uint8_t menu_index;
+
+		PillHandler* pillHandler;
 };
 
 #endif

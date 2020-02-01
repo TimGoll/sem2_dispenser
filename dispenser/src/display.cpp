@@ -19,10 +19,11 @@ void DisplayHandler::init(uint8_t width, uint8_t height, uint8_t address) {
 	this->display->clearDisplay();
 }
 
-void DisplayHandler::setMenu(MenuElement** menu_open, uint8_t* menu_index, uint8_t* menu_offset) {
+void DisplayHandler::setMenu(MenuElement** menu_open, uint8_t* menu_index, uint8_t* menu_offset, PillHandler* pill_handler) {
 	this->menu_open = menu_open;
 	this->menu_index = menu_index;
 	this->menu_offset = menu_offset;
+	this->pill_handler = pill_handler;
 }
 
 void DisplayHandler::update() {
@@ -49,9 +50,9 @@ void DisplayHandler::update() {
 	this->display->drawFastHLine(0, 9, 128, SSD1306_WHITE);
 
 	if ((*this->menu_open)->isTopLevel())
-		this->drawMainScreen(13);
+		this->drawMainScreen(15);
 	else
-		this->drawMenuScreen(13);
+		this->drawMenuScreen(15);
 
 	// update display
 	this->display->display();
@@ -70,7 +71,10 @@ void DisplayHandler::drawMainScreen(uint8_t start_y) {
 
 void DisplayHandler::drawMenuScreen(uint8_t start_y) {
 	for (uint8_t i = *this->menu_offset; i < min(MENU_DISPLAY_LINES + *this->menu_offset, (*this->menu_open)->getChildAmount()); i++) {
-		this->drawText(this->display, (*this->menu_open)->getChildAtIndex(i)->getName(), 1, 0, start_y + (i - *this->menu_offset) * 8);
+		if (i == (*this->menu_index) + (*this->menu_offset))
+			this->drawText(this->display, ">", 1, 0, start_y + (i - *this->menu_offset) * 8);
+
+		this->drawText(this->display, (*this->menu_open)->getChildAtIndex(i)->getText(), 1, 10, start_y + (i - *this->menu_offset) * 8);
 	}
 }
 

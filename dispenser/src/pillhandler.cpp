@@ -157,3 +157,15 @@ static void PillHandler::containerPlaced(PillHandler* self, uint8_t type) {
 		}
 	}
 }
+
+uint8_t PillHandler::getPillAmount(uint8_t id) {
+	return this->pillStack[id]->getPillAmount();
+}
+
+uint32_t PillHandler::getPillRefTime(uint8_t id) {
+	return this->pillStack[id]->getPillRefTime();
+}
+
+uint32_t PillHandler::getPillInterval(uint8_t id) {
+	return this->pillStack[id]->getPillInterval();
+}

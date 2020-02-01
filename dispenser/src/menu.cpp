@@ -5,6 +5,8 @@ MenuElement::MenuElement(uint8_t* name, uint8_t type, MenuElement* parent, uint8
 	this->type = type;
 	this->parent = parent;
 
+	this->text = new uint8_t[20]; // 20 char
+
 	// prepare structure for a list of children
 	if (type == MENU_SUBMENU) {
 		this->children = new children_t;
@@ -64,6 +66,18 @@ uint8_t MenuElement::getType() {
 	return this->type;
 }
 
+uint8_t* MenuElement::getText() {
+	return this->text;
+}
+
+void MenuElement::setText(uint8_t* text) {
+	strcpy(this->text, text);
+}
+
+void MenuElement::setName(uint8_t* name) {
+	strcpy(this->name, name);
+}
+
 bool MenuElement::isType(uint8_t type) {
 	return type == this->type;
 }
@@ -81,18 +95,23 @@ MenuHandler::MenuHandler() {
 
 	MenuElement* menu_none = new MenuElement("HEAD", MENU_SUBMENU, nullptr, 8);
 
+	// this callback updates all menu names once the menu is opened
+	menu_none->registerCallback(this, &MenuHandler::updateContents);
+
 	this->menu_head = menu_none;
 	this->menu_open = menu_none;
 
 	// REGISTERING MENU ELEMENTS
-	new MenuElement("main", MENU_SUBMENU, menu_none, 8);
-	new MenuElement("some_settings", MENU_ACTION, menu_none->getChild("main"), 0);
-	new MenuElement("some_settings2", MENU_ACTION, menu_none->getChild("main"), 0);
-	new MenuElement("some_settings3", MENU_ACTION, menu_none->getChild("main"), 0);
-	new MenuElement("some_settings4", MENU_ACTION, menu_none->getChild("main"), 0);
-	new MenuElement("some_settings5", MENU_ACTION, menu_none->getChild("main"), 0);
-	new MenuElement("some_settings6", MENU_ACTION, menu_none->getChild("main"), 0);
-	new MenuElement("some_settings7", MENU_ACTION, menu_none->getChild("main"), 0);
+	MenuElement* main = new MenuElement("main", MENU_SUBMENU, menu_none, 8);
+
+	new MenuElement("refill_a", MENU_ACTION, main, 0);
+	new MenuElement("refill_b", MENU_ACTION, main, 0);
+	new MenuElement("state_a_amount", MENU_ACTION, main, 0);
+	new MenuElement("state_a_interval", MENU_ACTION, main, 0);
+	new MenuElement("state_a_time", MENU_ACTION, main, 0);
+	new MenuElement("state_b_amount", MENU_ACTION, main, 0);
+	new MenuElement("state_b_interval", MENU_ACTION, main, 0);
+	new MenuElement("state_b_time", MENU_ACTION, main, 0);
 }
 
 MenuElement** MenuHandler::menuOpenPtr() {
@@ -107,7 +126,44 @@ uint8_t* MenuHandler::menuOffsetPtr() {
 	return &this->menu_offset;
 }
 
+void MenuHandler::setObjectPointer(PillHandler* pillHandler) {
+	this->pillHandler = pillHandler;
+}
+
 // BUTTON CALLBACK FUNCTIONS
+
+static void MenuHandler::updateContents(MenuHandler* self, uint8_t type) {
+	MenuElement* main_menu = self->menu_head->getChild("main");
+
+	DateTime now = RTC->now();
+
+	char buffer[21];
+
+	main_menu->getChild("refill_a")->setText("Refill Container A");
+	main_menu->getChild("refill_b")->setText("Refill Container B");
+
+	sprintf(buffer, "Amount A: %02d", self->pillHandler->getPillAmount(0));
+	main_menu->getChild("state_a_amount")->setText(buffer);
+
+	sprintf(buffer, "Amount B: %02d", self->pillHandler->getPillAmount(1));
+	main_menu->getChild("state_b_amount")->setText(buffer);
+
+	DateTime time1(self->pillHandler->getPillRefTime(0));
+	sprintf(buffer, "Next A: %s %02d:%02d", DAYS[time1.dayOfTheWeek()], time1.hour(), time1.minute());
+	main_menu->getChild("state_a_time")->setText(buffer);
+
+	DateTime time2(self->pillHandler->getPillRefTime(1));
+	sprintf(buffer, "Next B: %s %02d:%02d", DAYS[time2.dayOfTheWeek()], time2.hour(), time2.minute());
+	main_menu->getChild("state_b_time")->setText(buffer);
+
+	TimeSpan timespan1 = time1 - now;
+	sprintf(buffer, "Interval A: %01d:%02d:%02d", timespan1.days(), timespan1.hours(), timespan1.minutes());
+	main_menu->getChild("state_a_interval")->setText(buffer);
+
+	TimeSpan timespan2 = time2 - now;
+	sprintf(buffer, "Interval B: %01d:%02d:%02d", timespan2.days(), timespan2.hours(), timespan2.minutes());
+	main_menu->getChild("state_b_interval")->setText(buffer);
+}
 
 static void MenuHandler::buttonNext(MenuHandler* self, uint8_t type) {
 	self->menu_open->runCallback(0); //dummy value
