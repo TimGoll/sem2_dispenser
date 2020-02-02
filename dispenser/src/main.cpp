@@ -22,7 +22,7 @@ Main::Main() {
 	this->pillHandler = new PillHandler();
 
 	// READING DATA FROM EEPROM
-	uint16_t eeprom_index = 0;
+	uint16_t eeprom_index = 32;
 
 	this->pillHandler->readData(&eeprom_index);
 

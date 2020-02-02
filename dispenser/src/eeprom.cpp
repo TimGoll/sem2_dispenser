@@ -1,23 +1,33 @@
 #include "eeprom.hpp"
 
 uint8_t EEpromWrapper::readUInt8(uint16_t* address) {
-	return this->readInternal(address);
+	uint8_t value = 0;
+
+	EEPROM.get(*address, value);
+
+	*address += sizeof(uint8_t);
+
+	return value;
 }
 
 uint16_t EEpromWrapper::readUInt16(uint16_t* address) {
-	return (uint16_t) (
-		((uint16_t) this->readInternal(address) << 8) |
-		((uint16_t) this->readInternal(address))
-	);
+	uint16_t value = 0;
+
+	EEPROM.get(*address, value);
+
+	*address += sizeof(uint16_t);
+
+	return value;
 }
 
 uint32_t EEpromWrapper::readUInt32(uint16_t* address) {
-	return (uint32_t) (
-		((uint32_t) this->readInternal(address) << 24) |
-		((uint32_t) this->readInternal(address) << 16) |
-		((uint32_t) this->readInternal(address) << 8) |
-		((uint32_t) this->readInternal(address))
-	);
+	uint32_t value = 0;
+
+	EEPROM.get(*address, value);
+
+	*address += sizeof(uint32_t);
+
+	return value;
 }
 
 void EEpromWrapper::readString(uint16_t* address, uint8_t* string, uint8_t length) {
@@ -25,27 +35,21 @@ void EEpromWrapper::readString(uint16_t* address, uint8_t* string, uint8_t lengt
 }
 
 void EEpromWrapper::writeUInt8(uint16_t* address, uint8_t num) {
-	this->writeInternal(address, num);
+	EEPROM.put(*address, num);
+
+	*address += sizeof(uint8_t);
 }
 
 void EEpromWrapper::writeUInt16(uint16_t* address, uint16_t num) {
-	uint8_t num_1 = (uint8_t) (num >> 8);
-	uint8_t num_2 = (uint8_t) (num);
+	EEPROM.put(*address, num);
 
-	this->writeInternal(address, num_1);
-	this->writeInternal(address, num_2);
+	*address += sizeof(uint16_t);
 }
 
 void EEpromWrapper::writeUInt32(uint16_t* address, uint32_t num) {
-	uint8_t num_1 = (uint8_t) (num >> 24);
-	uint8_t num_2 = (uint8_t) (num >> 16);
-	uint8_t num_3 = (uint8_t) (num >> 8);
-	uint8_t num_4 = (uint8_t) (num);
+	EEPROM.put(*address, num);
 
-	this->writeInternal(address, num_1);
-	this->writeInternal(address, num_2);
-	this->writeInternal(address, num_3);
-	this->writeInternal(address, num_4);
+	*address += sizeof(uint32_t);
 }
 
 void EEpromWrapper::writeString(uint16_t* address, uint8_t* string, uint8_t length) {

@@ -33,6 +33,20 @@ void PillStack::setPillAmount(uint8_t amount) {
 
 void PillStack::setPillRefTime(uint32_t time) {
 	this->pill_ref_time = time;
+
+	//Serial.println(this->i_pill_ref_time);
+
+	//DateTime time2 = RTC->now();
+
+	//uint16_t i_pill_ref_time_ = this->i_pill_ref_time;
+
+	//EEPROMW->writeUInt32(&i_pill_ref_time_, time2.unixtime());
+
+	//uint16_t i_pill_ref_time_2 = this->i_pill_ref_time;
+
+	//Serial.print(i_pill_ref_time_2);
+	//Serial.print(" - reftime: ");
+	//Serial.println((uint32_t) EEPROMW->readUInt32(i_pill_ref_time_2));
 }
 
 void PillStack::setPillInterval(uint32_t time) {
@@ -94,7 +108,7 @@ void PillStack::throwPill() {
 	uint16_t i_pill_ref_time_ = this->i_pill_ref_time;
 
 	EEPROMW->writeUInt8(&i_pill_amount_, this->pill_amount);
-	EEPROMW->writeUInt32(&i_pill_ref_time_, this->pill_amount);
+	EEPROMW->writeUInt32(&i_pill_ref_time_, this->pill_ref_time);
 }
 
 void PillStack::createFakeTrigger() {
@@ -160,6 +174,7 @@ void PillHandler::readData(uint16_t* index) {
 
 void PillHandler::update() {
 	this->pillStack[0]->update();
+	this->pillStack[1]->update();
 }
 
 static void PillHandler::containerPlaced(PillHandler* self, uint8_t type) {
