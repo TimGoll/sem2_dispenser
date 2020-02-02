@@ -15,18 +15,27 @@ PillStack::~PillStack() {
 
 }
 
-void PillStack::setPillAmount(uint16_t index, uint8_t amount) {
+void PillStack::setPillAmountIndex(uint16_t index) {
 	this->i_pill_amount = index;
+}
+
+void PillStack::setPillRefTimeIndex(uint16_t index) {
+	this->i_pill_ref_time = index;
+}
+
+void PillStack::setPillIntervalIndex(uint16_t index) {
+	this->i_pill_interval = index;
+}
+
+void PillStack::setPillAmount(uint8_t amount) {
 	this->pill_amount = amount;
 }
 
-void PillStack::setPillRefTime(uint16_t index, uint32_t time) {
-	this->i_pill_ref_time = index;
+void PillStack::setPillRefTime(uint32_t time) {
 	this->pill_ref_time = time;
 }
 
-void PillStack::setPillInterval(uint16_t index, uint32_t time) {
-	this->i_pill_interval = index;
+void PillStack::setPillInterval(uint32_t time) {
 	this->pill_interval = time;
 }
 
@@ -129,18 +138,24 @@ void PillHandler::readData(uint16_t* index) {
 	this->data_index = *index;
 
 	// PILL HOLDER A
-	this->pillStack[0]->setPillAmount(*index, EEPROMW->readUInt8(index));
+	this->pillStack[0]->setPillAmountIndex(*index);
+	this->pillStack[0]->setPillAmount(EEPROMW->readUInt8(index));
 
-	this->pillStack[0]->setPillRefTime(*index, EEPROMW->readUInt32(index));
+	this->pillStack[0]->setPillRefTimeIndex(*index);
+	this->pillStack[0]->setPillRefTime(EEPROMW->readUInt32(index));
 
-	this->pillStack[0]->setPillInterval(*index, EEPROMW->readUInt32(index));
+	this->pillStack[0]->setPillIntervalIndex(*index);
+	this->pillStack[0]->setPillInterval(EEPROMW->readUInt32(index));
 
 	// PILL HOLDER B
-	this->pillStack[1]->setPillAmount(*index, EEPROMW->readUInt8(index));
+	this->pillStack[1]->setPillAmountIndex(*index);
+	this->pillStack[1]->setPillAmount(EEPROMW->readUInt8(index));
 
-	this->pillStack[1]->setPillRefTime(*index, EEPROMW->readUInt32(index));
+	this->pillStack[1]->setPillRefTimeIndex(*index);
+	this->pillStack[1]->setPillRefTime(EEPROMW->readUInt32(index));
 
-	this->pillStack[1]->setPillInterval(*index, EEPROMW->readUInt32(index));
+	this->pillStack[1]->setPillIntervalIndex(*index);
+	this->pillStack[1]->setPillInterval(EEPROMW->readUInt32(index));
 }
 
 void PillHandler::update() {

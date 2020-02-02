@@ -20,11 +20,17 @@ class PillStack {
 		PillStack(uint8_t pin);
 		~PillStack();
 
-		void setPillAmount(uint16_t index, uint8_t amount);
+		void setPillAmountIndex(uint16_t index);
 
-		void setPillRefTime(uint16_t index, uint32_t time);
+		void setPillRefTimeIndex(uint16_t index);
 
-		void setPillInterval(uint16_t index, uint32_t time);
+		void setPillIntervalIndex(uint16_t index);
+
+		void setPillAmount(uint8_t amount);
+
+		void setPillRefTime(uint32_t time);
+
+		void setPillInterval(uint32_t time);
 
 		uint8_t getPillAmount();
 
