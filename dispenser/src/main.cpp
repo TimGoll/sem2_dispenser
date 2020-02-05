@@ -39,15 +39,15 @@ Main::Main() {
 	this->menuHandler->setObjectPointer(this->pillHandler);
 
 	// REGISTERING MENU BUTTON CALLBACKS
-	this->buttonHandler->addCallback(10, RISING, this->menuHandler, &MenuHandler::buttonPrev);
-	this->buttonHandler->addCallback(11, RISING, this->menuHandler, &MenuHandler::buttonNext);
-	this->buttonHandler->addCallback(12, RISING, this->menuHandler, &MenuHandler::buttonDown, 1000, 100);
-	this->buttonHandler->addCallback(13, RISING, this->menuHandler, &MenuHandler::buttonUp, 1000, 100);
+	this->buttonHandler->addCallback(15, RISING, this->menuHandler, &MenuHandler::buttonPrev);
+	this->buttonHandler->addCallback(14, RISING, this->menuHandler, &MenuHandler::buttonNext);
+	this->buttonHandler->addCallback(16, RISING, this->menuHandler, &MenuHandler::buttonDown, 1000, 100);
+	this->buttonHandler->addCallback(17, RISING, this->menuHandler, &MenuHandler::buttonUp, 1000, 100);
 
-	this->buttonHandler->addCallback(52, RISING, this->pillHandler, &PillHandler::containerPlaced);
+	this->buttonHandler->addCallback(18, RISING, this->pillHandler, &PillHandler::containerPlaced);
 
 	// add a debug button to prepare a fake pill event
-	this->buttonHandler->addCallback(53, RISING, this, &Main::prepareCustomPill);
+	this->buttonHandler->addCallback(19, RISING, this, &Main::prepareCustomPill);
 };
 
 Main::~Main() {

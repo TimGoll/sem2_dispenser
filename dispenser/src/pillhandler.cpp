@@ -77,7 +77,7 @@ void PillStack::update() {
 		this->pill_ready = true;
 
 		// start beeper
-		tone(8, 1000, 750);
+		tone(5, 1000, 750);
 		Serial.println("pill ready!");
 	}
 
@@ -132,8 +132,8 @@ void PillStack::createFakeTrigger() {
 PillHandler::PillHandler() {
 	this->data_index = 0;
 
-	this->pillStack[0] = new PillStack(2);
-	this->pillStack[1] = new PillStack(3);
+	this->pillStack[0] = new PillStack(7);
+	this->pillStack[1] = new PillStack(6);
 
 	this->container_placed = false;
 }
