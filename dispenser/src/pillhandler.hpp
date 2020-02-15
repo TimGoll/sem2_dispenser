@@ -46,6 +46,10 @@ class PillStack {
 
 		void throwPill();
 
+		void refillPills();
+
+		void reset();
+
 		void createFakeTrigger();
 	private:
 		uint8_t pill_amount;
@@ -77,6 +81,12 @@ class PillHandler {
 		void update();
 
 		static void containerPlaced(PillHandler* self, uint8_t type);
+
+		static void refillA(PillHandler* self, uint8_t type);
+
+		static void refillB(PillHandler* self, uint8_t type);
+
+		static void reset(PillHandler* self, uint8_t type);
 
 		uint8_t getPillAmount(uint8_t id);
 

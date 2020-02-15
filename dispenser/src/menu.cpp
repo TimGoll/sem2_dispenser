@@ -93,25 +93,31 @@ MenuHandler::MenuHandler() {
 	this->menu_offset = 0;
 	this->menu_index = 0;
 
-	MenuElement* menu_none = new MenuElement("HEAD", MENU_SUBMENU, nullptr, 8);
-
-	// this callback updates all menu names once the menu is opened
-	menu_none->registerCallback(this, &MenuHandler::updateContents);
+	MenuElement* menu_none = new MenuElement("HEAD", MENU_SUBMENU, nullptr, 2);
 
 	this->menu_head = menu_none;
 	this->menu_open = menu_none;
 
 	// REGISTERING MENU ELEMENTS
-	MenuElement* main = new MenuElement("main", MENU_SUBMENU, menu_none, 8);
+	MenuElement* main = new MenuElement("main", MENU_SUBMENU, menu_none, 10);
 
-	new MenuElement("refill_a", MENU_ACTION, main, 0);
-	new MenuElement("refill_b", MENU_ACTION, main, 0);
+	// this callback updates all menu names once the menu is opened
+	main->registerCallback(this, &MenuHandler::updateContents);
+
+	MenuElement* refill_a = new MenuElement("refill_a", MENU_ACTION, main, 0);
+	MenuElement* refill_b = new MenuElement("refill_b", MENU_ACTION, main, 0);
 	new MenuElement("state_a_amount", MENU_ACTION, main, 0);
 	new MenuElement("state_a_interval", MENU_ACTION, main, 0);
 	new MenuElement("state_a_time", MENU_ACTION, main, 0);
 	new MenuElement("state_b_amount", MENU_ACTION, main, 0);
 	new MenuElement("state_b_interval", MENU_ACTION, main, 0);
 	new MenuElement("state_b_time", MENU_ACTION, main, 0);
+	MenuElement* reset = new MenuElement("reset_data", MENU_ACTION, main, 0);
+
+	// register refill callbacks
+	refill_a->registerCallback(this->pillHandler, &PillHandler::refillA);
+	refill_b->registerCallback(this->pillHandler, &PillHandler::refillB);
+	reset->registerCallback(this->pillHandler, &PillHandler::reset);
 }
 
 MenuElement** MenuHandler::menuOpenPtr() {
@@ -163,12 +169,14 @@ static void MenuHandler::updateContents(MenuHandler* self, uint8_t type) {
 	TimeSpan timespan2 = time2 - now;
 	sprintf(buffer, "Interval B: %01d:%02d:%02d", timespan2.days(), timespan2.hours(), timespan2.minutes());
 	main_menu->getChild("state_b_interval")->setText(buffer);
+
+	main_menu->getChild("reset")->setText("RESET PILL DATA");
 }
 
 static void MenuHandler::buttonNext(MenuHandler* self, uint8_t type) {
-	self->menu_open->runCallback(0); //dummy value
-
 	MenuElement* new_open_menu = self->menu_open->getChildAtIndex(self->menu_offset + self->menu_index);
+
+	new_open_menu->runCallback(0); //dummy value
 
 	if (not new_open_menu)
 		return;

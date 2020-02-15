@@ -1,33 +1,36 @@
 #include "eeprom.hpp"
 
 uint8_t EEpromWrapper::readUInt8(uint16_t* address) {
-	uint8_t value = 0;
+	int8_t value = 0;
 
 	EEPROM.get(*address, value);
 
 	*address += sizeof(uint8_t);
 
-	return value;
+	return (uint8_t) value;
 }
 
 uint16_t EEpromWrapper::readUInt16(uint16_t* address) {
-	uint16_t value = 0;
+	int16_t value = 0;
 
 	EEPROM.get(*address, value);
 
 	*address += sizeof(uint16_t);
 
-	return value;
+	return (uint16_t) value;
 }
 
 uint32_t EEpromWrapper::readUInt32(uint16_t* address) {
-	uint32_t value = 0;
+	int32_t value = 0;
 
 	EEPROM.get(*address, value);
 
 	*address += sizeof(uint32_t);
 
-	return value;
+	//Serial.print("read uint: ");
+	//Serial.println(value);
+
+	return (uint32_t) value;
 }
 
 void EEpromWrapper::readString(uint16_t* address, uint8_t* string, uint8_t length) {
@@ -35,19 +38,22 @@ void EEpromWrapper::readString(uint16_t* address, uint8_t* string, uint8_t lengt
 }
 
 void EEpromWrapper::writeUInt8(uint16_t* address, uint8_t num) {
-	EEPROM.put(*address, num);
+	EEPROM.put(*address, (int8_t) num);
 
 	*address += sizeof(uint8_t);
 }
 
 void EEpromWrapper::writeUInt16(uint16_t* address, uint16_t num) {
-	EEPROM.put(*address, num);
+	EEPROM.put(*address, (int16_t) num);
 
 	*address += sizeof(uint16_t);
 }
 
 void EEpromWrapper::writeUInt32(uint16_t* address, uint32_t num) {
-	EEPROM.put(*address, num);
+	EEPROM.put(*address, (int32_t) num);
+
+	//Serial.print("write uint: ");
+	//Serial.println(num);
 
 	*address += sizeof(uint32_t);
 }

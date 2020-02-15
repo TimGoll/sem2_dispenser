@@ -29,28 +29,45 @@ void PillStack::setPillIntervalIndex(uint16_t index) {
 
 void PillStack::setPillAmount(uint8_t amount) {
 	this->pill_amount = amount;
+
+	// print debug information
+	Serial.print("Setting Pill Amount at: ");
+	Serial.println(this->pin);
+	Serial.print("Amount: ");
+	Serial.println(this->pill_amount);
+	Serial.print("At storage position: ");
+	Serial.println(this->i_pill_amount);
+	Serial.println("----------------------------");
 }
 
 void PillStack::setPillRefTime(uint32_t time) {
 	this->pill_ref_time = time;
 
-	//Serial.println(this->i_pill_ref_time);
+	// print debug information
+	DateTime time2(this->pill_ref_time);
+	char buffer[40];
+	sprintf(buffer, "%s - %02d:%02d:%02d", DAYS[time2.dayOfTheWeek()], time2.hour(), time2.minute(), time2.second());
 
-	//DateTime time2 = RTC->now();
-
-	//uint16_t i_pill_ref_time_ = this->i_pill_ref_time;
-
-	//EEPROMW->writeUInt32(&i_pill_ref_time_, time2.unixtime());
-
-	//uint16_t i_pill_ref_time_2 = this->i_pill_ref_time;
-
-	//Serial.print(i_pill_ref_time_2);
-	//Serial.print(" - reftime: ");
-	//Serial.println((uint32_t) EEPROMW->readUInt32(i_pill_ref_time_2));
+	Serial.print("Setting Reference Time at: ");
+	Serial.println(this->pin);
+	Serial.print("Time: ");
+	Serial.println(buffer);
+	Serial.print("At storage position: ");
+	Serial.println(this->i_pill_ref_time);
+	Serial.println("----------------------------");
 }
 
 void PillStack::setPillInterval(uint32_t time) {
 	this->pill_interval = time;
+
+	// print debug information
+	Serial.print("Setting Pill Interval at: ");
+	Serial.println(this->pin);
+	Serial.print("Time: ");
+	Serial.println(this->pill_interval);
+	Serial.print("At storage position: ");
+	Serial.println(this->i_pill_interval);
+	Serial.println("----------------------------");
 }
 
 uint8_t PillStack::getPillAmount() {
@@ -78,7 +95,11 @@ void PillStack::update() {
 
 		// start beeper
 		tone(5, 1000, 750);
-		Serial.println("pill ready!");
+
+		// print debug information
+		Serial.print("Pill is ready at pin: ");
+		Serial.println(this->pin);
+		Serial.println("----------------------------");
 	}
 
 	if (millis() > this->retraction_time) {
@@ -89,6 +110,13 @@ void PillStack::update() {
 }
 
 void PillStack::throwPill() {
+	if (this->pill_amount == 0) {
+		// start beeper
+		tone(5, 500, 350);
+
+		return;
+	}
+
 	// set throw position time flag
 	this->retraction_time = millis() + THROW_TIME;
 
@@ -109,24 +137,80 @@ void PillStack::throwPill() {
 
 	EEPROMW->writeUInt8(&i_pill_amount_, this->pill_amount);
 	EEPROMW->writeUInt32(&i_pill_ref_time_, this->pill_ref_time);
+
+	// print debug info
+	DateTime time(this->pill_ref_time);
+	char buffer[40];
+	sprintf(buffer, "%s - %02d:%02d:%02d", DAYS[time.dayOfTheWeek()], time.hour(), time.minute(), time.second());
+
+	Serial.print("Pill is thrown at pin: ");
+	Serial.println(this->pin);
+	Serial.print("Next pill ref time: ");
+	Serial.println(buffer);
+	Serial.print("Leftover pills: ");
+	Serial.println(this->pill_amount);
+	Serial.println("----------------------------");
+}
+
+void PillStack::refillPills() {
+	this->pill_amount = 20;
+
+	// print debug info
+	Serial.print("Pillstack is refilled at: ");
+	Serial.println(this->pin);
+	Serial.print("New pill amount: ");
+	Serial.println(this->pill_amount);
+	Serial.println("----------------------------");
+
+	// update EEPROM storage
+
+	// we have to cache the index variables here since writeUint modifies it
+	uint16_t i_pill_amount_ = this->i_pill_amount;
+
+	EEPROMW->writeUInt32(&i_pill_amount_, this->pill_amount);
+}
+
+void PillStack::reset() {
+	Serial.println("RESETTING DATA");
+
+	// we have to cache the index variables here since writeUint modifies it
+	uint16_t i_pill_amount_ = this->i_pill_amount;
+	uint16_t pill_interval_ = this->pill_interval;
+	uint16_t i_pill_ref_time_ = this->pill_ref_time;
+
+	uint8_t new_pill_amount = 20;
+	uint32_t new_pill_interval = 86400;
+
+	DateTime time = RTC->now();
+
+	uint32_t new_pill_ref_time = time.unixtime();
+
+	EEPROMW->writeUInt32(&i_pill_amount_, new_pill_amount);
+	EEPROMW->writeUInt32(&pill_interval_, new_pill_interval);
+	EEPROMW->writeUInt32(&i_pill_ref_time_, new_pill_ref_time);
+
+	this->setPillAmount(new_pill_amount);
+	this->setPillInterval(new_pill_interval);
+	this->setPillRefTime(new_pill_ref_time);
 }
 
 void PillStack::createFakeTrigger() {
-	Serial.print(this->pin);
-	Serial.println(" - Creating fake trigger.");
+	Serial.print("Creating fake trigger event at pin: ");
+	Serial.println(this->pin);
+	Serial.println("----------------------------");
 
 	// get current time
 	DateTime time = RTC->now();
 
 	// create a fake pill ready event in 15 seconds
-	this->pill_ref_time = time.unixtime() + 15;
+	this->pill_ref_time = time.unixtime() + 10;
 
 	// update EEPROM storage
 
 	// we have to cache the index variables here since writeUint modifies it
 	uint16_t i_pill_ref_time_ = this->i_pill_ref_time;
 
-	EEPROMW->writeUInt32(&i_pill_ref_time_, this->pill_amount);
+	EEPROMW->writeUInt32(&i_pill_ref_time_, this->pill_ref_time);
 }
 
 PillHandler::PillHandler() {
@@ -148,6 +232,8 @@ void PillHandler::createFakeTrigger() {
 }
 
 void PillHandler::readData(uint16_t* index) {
+	Serial.println("----------------------------");
+
 	// cache storage position for later data update
 	this->data_index = *index;
 
@@ -183,9 +269,25 @@ static void PillHandler::containerPlaced(PillHandler* self, uint8_t type) {
 			self->pillStack[i]->throwPill();
 
 			// stop after one pill is thrown, never throw two!
-			break;
+			return;
 		}
 	}
+
+	// if no pill was thrown and the functions was returned, play sound
+	tone(5, 300, 500);
+}
+
+static void PillHandler::refillA(PillHandler* self, uint8_t type) {
+	self->pillStack[0]->refillPills();
+}
+
+static void PillHandler::refillB(PillHandler* self, uint8_t type) {
+	self->pillStack[1]->refillPills();
+}
+
+static void PillHandler::reset(PillHandler* self, uint8_t type) {
+	self->pillStack[0]->reset();
+	self->pillStack[1]->reset();
 }
 
 uint8_t PillHandler::getPillAmount(uint8_t id) {
