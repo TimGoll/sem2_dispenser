@@ -104,20 +104,15 @@ MenuHandler::MenuHandler() {
 	// this callback updates all menu names once the menu is opened
 	main->registerCallback(this, &MenuHandler::updateContents);
 
-	MenuElement* refill_a = new MenuElement("refill_a", MENU_ACTION, main, 0);
-	MenuElement* refill_b = new MenuElement("refill_b", MENU_ACTION, main, 0);
+	new MenuElement("refill_a", MENU_ACTION, main, 0);
+	new MenuElement("refill_b", MENU_ACTION, main, 0);
 	new MenuElement("state_a_amount", MENU_ACTION, main, 0);
 	new MenuElement("state_a_interval", MENU_ACTION, main, 0);
 	new MenuElement("state_a_time", MENU_ACTION, main, 0);
 	new MenuElement("state_b_amount", MENU_ACTION, main, 0);
 	new MenuElement("state_b_interval", MENU_ACTION, main, 0);
 	new MenuElement("state_b_time", MENU_ACTION, main, 0);
-	MenuElement* reset = new MenuElement("reset_data", MENU_ACTION, main, 0);
-
-	// register refill callbacks
-	refill_a->registerCallback(this->pillHandler, &PillHandler::refillA);
-	refill_b->registerCallback(this->pillHandler, &PillHandler::refillB);
-	reset->registerCallback(this->pillHandler, &PillHandler::reset);
+	new MenuElement("reset_data", MENU_ACTION, main, 0);
 }
 
 MenuElement** MenuHandler::menuOpenPtr() {
@@ -134,6 +129,11 @@ uint8_t* MenuHandler::menuOffsetPtr() {
 
 void MenuHandler::setObjectPointer(PillHandler* pillHandler) {
 	this->pillHandler = pillHandler;
+
+	// register refill callbacks
+	this->menu_head->getChild("main")->getChild("refill_a")->registerCallback(this->pillHandler, &PillHandler::refillA);
+	this->menu_head->getChild("main")->getChild("refill_b")->registerCallback(this->pillHandler, &PillHandler::refillB);
+	this->menu_head->getChild("main")->getChild("reset_data")->registerCallback(this->pillHandler, &PillHandler::reset);
 }
 
 // BUTTON CALLBACK FUNCTIONS
@@ -176,10 +176,10 @@ static void MenuHandler::updateContents(MenuHandler* self, uint8_t type) {
 static void MenuHandler::buttonNext(MenuHandler* self, uint8_t type) {
 	MenuElement* new_open_menu = self->menu_open->getChildAtIndex(self->menu_offset + self->menu_index);
 
-	new_open_menu->runCallback(0); //dummy value
-
 	if (not new_open_menu)
 		return;
+
+	new_open_menu->runCallback(0); // pass a dummy value
 
 	if (new_open_menu->isType(MENU_SUBMENU))
 		self->menu_open = new_open_menu;
