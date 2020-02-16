@@ -79,10 +79,26 @@ void DisplayHandler::drawMainScreen(uint8_t start_y, boolean blink_state) {
 
 	if (blink_state and (this->pill_handler->isPillReady(0) or this->pill_handler->isPillReady(1))) {
 		this->drawText(
-		this->display,
-		"READY",
-		/*size:*/1, /*x:*/50, /*y:*/start_y + 5
-	);
+			this->display,
+			"READY",
+			/*size:*/1, /*x:*/50, /*y:*/start_y + 5
+		);
+	}
+
+	if (this->pill_handler->isPillReady(0)) {
+		this->drawText(
+			this->display,
+			"!",
+			/*size:*/1, /*x:*/25, /*y:*/start_y
+		);
+	}
+
+	if (this->pill_handler->isPillReady(1)) {
+		this->drawText(
+			this->display,
+			"!",
+			/*size:*/1, /*x:*/93, /*y:*/start_y
+		);
 	}
 }
 
