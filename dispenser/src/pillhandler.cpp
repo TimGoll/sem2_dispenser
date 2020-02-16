@@ -301,3 +301,7 @@ uint32_t PillHandler::getPillRefTime(uint8_t id) {
 uint32_t PillHandler::getPillInterval(uint8_t id) {
 	return this->pillStack[id]->getPillInterval();
 }
+
+bool PillHandler::isPillReady(uint8_t id) {
+	return this->pillStack[id]->isPillReady();
+}

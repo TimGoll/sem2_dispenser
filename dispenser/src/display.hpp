@@ -44,7 +44,7 @@ class DisplayHandler {
 		void drawText(Adafruit_SSD1306* display, uint8_t* text);
 		void drawText(Adafruit_SSD1306* display, uint8_t* text, uint8_t size, uint8_t posX, uint8_t posY);
 
-		void drawMainScreen(uint8_t start_y);
+		void drawMainScreen(uint8_t start_y, boolean blink_state);
 		void drawMenuScreen(uint8_t start_y);
 
 		// internal variables

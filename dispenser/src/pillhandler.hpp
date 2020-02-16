@@ -10,8 +10,8 @@
 
 #define MAX_AMOUNT_PILLSTACKS 2
 
-#define POS_PILL_OUT 120
-#define POS_PILL_IN 20
+#define POS_PILL_OUT 150
+#define POS_PILL_IN 0
 
 #define THROW_TIME 1000
 
@@ -93,6 +93,8 @@ class PillHandler {
 		uint32_t getPillRefTime(uint8_t id);
 
 		uint32_t getPillInterval(uint8_t id);
+
+		bool isPillReady(uint8_t id);
 
 	private:
 		uint8_t data_index;

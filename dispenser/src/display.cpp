@@ -50,9 +50,9 @@ void DisplayHandler::update() {
 	this->display->drawFastHLine(0, 9, 128, SSD1306_WHITE);
 
 	if ((*this->menu_open)->isTopLevel())
-		this->drawMainScreen(15);
+		this->drawMainScreen(14, time.unixtime() % 2 >= 1);
 	else
-		this->drawMenuScreen(15);
+		this->drawMenuScreen(14);
 
 	// update display
 	this->display->display();
@@ -61,12 +61,29 @@ void DisplayHandler::update() {
 	this->last_draw = millis();
 }
 
-void DisplayHandler::drawMainScreen(uint8_t start_y) {
+void DisplayHandler::drawMainScreen(uint8_t start_y, boolean blink_state) {
+	char buffer[40];
+	sprintf(buffer, "A : %02d         %02d : B", this->pill_handler->getPillAmount(0), this->pill_handler->getPillAmount(1));
+
 	this->drawText(
 		this->display,
-		"Hello World!\nThis is a new line!",
+		"Pill             Pill",
 		/*size:*/1, /*x:*/0, /*y:*/start_y
 	);
+
+	this->drawText(
+		this->display,
+		buffer,
+		/*size:*/1, /*x:*/0, /*y:*/start_y + 9
+	);
+
+	if (blink_state and (this->pill_handler->isPillReady(0) or this->pill_handler->isPillReady(1))) {
+		this->drawText(
+		this->display,
+		"READY",
+		/*size:*/1, /*x:*/50, /*y:*/start_y + 5
+	);
+	}
 }
 
 void DisplayHandler::drawMenuScreen(uint8_t start_y) {
