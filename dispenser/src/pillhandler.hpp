@@ -88,6 +88,14 @@ class PillHandler {
 
 		static void reset(PillHandler* self, uint8_t type);
 
+		static void setA0(PillHandler* self, uint8_t type);
+
+		static void setA10(PillHandler* self, uint8_t type);
+
+		static void setB0(PillHandler* self, uint8_t type);
+
+		static void setB10(PillHandler* self, uint8_t type);
+
 		uint8_t getPillAmount(uint8_t id);
 
 		uint32_t getPillRefTime(uint8_t id);

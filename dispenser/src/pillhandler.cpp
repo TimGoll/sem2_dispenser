@@ -290,6 +290,22 @@ static void PillHandler::reset(PillHandler* self, uint8_t type) {
 	self->pillStack[1]->reset();
 }
 
+static void PillHandler::setA0(PillHandler* self, uint8_t type) {
+	self->pillStack[0]->setPillAmount(0);
+}
+
+static void PillHandler::setA10(PillHandler* self, uint8_t type) {
+	self->pillStack[0]->setPillAmount(10);
+}
+
+static void PillHandler::setB0(PillHandler* self, uint8_t type) {
+	self->pillStack[1]->setPillAmount(0);
+}
+
+static void PillHandler::setB10(PillHandler* self, uint8_t type) {
+	self->pillStack[1]->setPillAmount(10);
+}
+
 uint8_t PillHandler::getPillAmount(uint8_t id) {
 	return this->pillStack[id]->getPillAmount();
 }

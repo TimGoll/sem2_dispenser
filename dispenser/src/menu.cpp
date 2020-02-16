@@ -99,7 +99,7 @@ MenuHandler::MenuHandler() {
 	this->menu_open = menu_none;
 
 	// REGISTERING MENU ELEMENTS
-	MenuElement* main = new MenuElement("main", MENU_SUBMENU, menu_none, 10);
+	MenuElement* main = new MenuElement("main", MENU_SUBMENU, menu_none, 16);
 
 	// this callback updates all menu names once the menu is opened
 	main->registerCallback(this, &MenuHandler::updateContents);
@@ -113,6 +113,10 @@ MenuHandler::MenuHandler() {
 	new MenuElement("state_b_interval", MENU_ACTION, main, 0);
 	new MenuElement("state_b_time", MENU_ACTION, main, 0);
 	new MenuElement("reset_data", MENU_ACTION, main, 0);
+	new MenuElement("set_a_0", MENU_ACTION, main, 0);
+	new MenuElement("set_a_10", MENU_ACTION, main, 0);
+	new MenuElement("set_b_0", MENU_ACTION, main, 0);
+	new MenuElement("set_b_10", MENU_ACTION, main, 0);
 }
 
 MenuElement** MenuHandler::menuOpenPtr() {
@@ -134,6 +138,10 @@ void MenuHandler::setObjectPointer(PillHandler* pillHandler) {
 	this->menu_head->getChild("main")->getChild("refill_a")->registerCallback(this->pillHandler, &PillHandler::refillA);
 	this->menu_head->getChild("main")->getChild("refill_b")->registerCallback(this->pillHandler, &PillHandler::refillB);
 	this->menu_head->getChild("main")->getChild("reset_data")->registerCallback(this->pillHandler, &PillHandler::reset);
+	this->menu_head->getChild("main")->getChild("set_a_0")->registerCallback(this->pillHandler, &PillHandler::setA0);
+	this->menu_head->getChild("main")->getChild("set_a_10")->registerCallback(this->pillHandler, &PillHandler::setA10);
+	this->menu_head->getChild("main")->getChild("set_b_0")->registerCallback(this->pillHandler, &PillHandler::setB0);
+	this->menu_head->getChild("main")->getChild("set_b_10")->registerCallback(this->pillHandler, &PillHandler::setB10);
 }
 
 // BUTTON CALLBACK FUNCTIONS
@@ -170,7 +178,11 @@ static void MenuHandler::updateContents(MenuHandler* self, uint8_t type) {
 	sprintf(buffer, "Interval B: %01d:%02d:%02d", timespan2.days(), timespan2.hours(), timespan2.minutes());
 	main_menu->getChild("state_b_interval")->setText(buffer);
 
-	main_menu->getChild("reset")->setText("RESET PILL DATA");
+	main_menu->getChild("reset_data")->setText("D - RESET DATA");
+	main_menu->getChild("set_a_0")->setText("D - SET A TO 0");
+	main_menu->getChild("set_a_10")->setText("D - SET A TO 10");
+	main_menu->getChild("set_b_0")->setText("D - SET B TO 0");
+	main_menu->getChild("set_b_10")->setText("D - SET B TO 10");
 }
 
 static void MenuHandler::buttonNext(MenuHandler* self, uint8_t type) {
